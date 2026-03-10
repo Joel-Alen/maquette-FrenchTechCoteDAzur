@@ -2,1096 +2,553 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>French Tech Côte d'Azur — Plateforme</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FTCA — Plateforme</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #13131a;
-    --surface2: #1c1c28;
-    --border: #2a2a3a;
-    --accent: #e8343c;
-    --accent2: #ff6b35;
-    --blue: #4a9eff;
-    --green: #2dd4a0;
-    --text: #f0f0f5;
-    --muted: #7070a0;
-    --card: #16161f;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    overflow: hidden;
-    height: 100vh;
-  }
-
-  /* SIDEBAR */
-  .sidebar {
-    width: 240px;
-    min-width: 240px;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    position: relative;
-    z-index: 10;
-  }
-  .logo {
-    padding: 28px 24px 24px;
-    border-bottom: 1px solid var(--border);
-  }
-  .logo-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border-radius: 10px;
-    padding: 6px 12px;
-    margin-bottom: 10px;
-  }
-  .logo-badge span {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.05em;
-    color: #fff;
-  }
-  .logo h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted);
-    letter-spacing: 0.03em;
-    line-height: 1.4;
-  }
-
-  .nav-section { padding: 16px 12px 8px; }
-  .nav-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    text-transform: uppercase;
-    padding: 0 8px;
-    margin-bottom: 6px;
-  }
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.15s;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--muted);
-    margin-bottom: 2px;
-  }
-  .nav-item:hover { background: var(--surface2); color: var(--text); }
-  .nav-item.active {
-    background: rgba(232, 52, 60, 0.12);
-    color: var(--accent);
-    font-weight: 500;
-  }
-  .nav-item .icon { font-size: 16px; width: 20px; text-align: center; }
-  .nav-item .badge {
-    margin-left: auto;
-    background: var(--accent);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 20px;
-  }
-  .nav-item .badge.green { background: var(--green); color: #000; }
-  .sidebar-footer {
-    margin-top: auto;
-    padding: 16px 12px;
-    border-top: 1px solid var(--border);
-  }
-  .user-card {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .user-card:hover { background: var(--surface2); }
-  .avatar {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 12px; color: #fff;
-    flex-shrink: 0;
-  }
-  .user-info { flex: 1; min-width: 0; }
-  .user-name { font-size: 13px; font-weight: 500; color: var(--text); }
-  .user-role { font-size: 11px; color: var(--muted); }
-
-  /* MAIN */
-  .main {
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* TOPBAR */
-  .topbar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 5;
-  }
-  .topbar h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-  }
-  .topbar-actions { display: flex; gap: 10px; align-items: center; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 13px; font-weight: 500;
-    cursor: pointer; border: none; transition: all 0.15s;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: #fff;
-  }
-  .btn-primary:hover { background: #c82a32; }
-  .btn-ghost {
-    background: var(--surface2);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-  .btn-ghost:hover { background: var(--border); }
-
-  /* CONTENT */
-  .content { padding: 32px; flex: 1; }
-
-  /* TABS */
-  .tabs { display: flex; gap: 4px; margin-bottom: 28px; background: var(--surface2); padding: 4px; border-radius: 10px; width: fit-content; }
-  .tab {
-    padding: 8px 18px; border-radius: 7px; font-size: 13px; font-weight: 500;
-    cursor: pointer; transition: all 0.15s; color: var(--muted); border: none; background: none;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .tab.active { background: var(--card); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
-  .tab:hover:not(.active) { color: var(--text); }
-
-  /* STATS ROW */
-  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .stat-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: var(--accent-color, var(--accent));
-  }
-  .stat-card.blue::before { --accent-color: var(--blue); }
-  .stat-card.green::before { --accent-color: var(--green); }
-  .stat-card.orange::before { --accent-color: var(--accent2); }
-  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-  .stat-value { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; line-height: 1; }
-  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 6px; }
-  .stat-trend { font-size: 11px; color: var(--green); margin-top: 4px; }
-
-  /* SECTION TITLE */
-  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-  .section-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; }
-
-  /* EVENTS LIST */
-  .event-list { display: flex; flex-direction: column; gap: 10px; }
-  .event-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .event-card:hover { border-color: var(--accent); transform: translateY(-1px); }
-  .event-date-block {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 8px 12px;
-    text-align: center;
-    min-width: 52px;
-    border: 1px solid var(--border);
-  }
-  .event-day { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; line-height: 1; }
-  .event-month { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-  .event-info { flex: 1; }
-  .event-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
-  .event-meta { display: flex; gap: 12px; font-size: 12px; color: var(--muted); }
-  .event-tags { display: flex; gap: 6px; }
-  .tag {
-    font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500;
-  }
-  .tag-blue { background: rgba(74, 158, 255, 0.12); color: var(--blue); border: 1px solid rgba(74,158,255,0.2); }
-  .tag-green { background: rgba(45, 212, 160, 0.12); color: var(--green); border: 1px solid rgba(45,212,160,0.2); }
-  .tag-red { background: rgba(232, 52, 60, 0.12); color: var(--accent); border: 1px solid rgba(232,52,60,0.2); }
-  .tag-orange { background: rgba(255, 107, 53, 0.12); color: var(--accent2); border: 1px solid rgba(255,107,53,0.2); }
-  .event-progress { width: 120px; }
-  .progress-label { font-size: 11px; color: var(--muted); margin-bottom: 5px; display: flex; justify-content: space-between; }
-  .progress-bar { height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
-  .progress-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-  .progress-fill.blue { background: var(--blue); }
-  .progress-fill.green { background: var(--green); }
-
-  /* TWO COL */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-  /* CRM TABLE */
-  .crm-table { width: 100%; border-collapse: collapse; }
-  .crm-table th {
-    text-align: left; font-size: 11px; font-weight: 600;
-    color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 0 12px 10px; border-bottom: 1px solid var(--border);
-  }
-  .crm-table td { padding: 12px; border-bottom: 1px solid rgba(42,42,58,0.5); font-size: 13px; }
-  .crm-table tr:last-child td { border-bottom: none; }
-  .crm-table tr:hover td { background: var(--surface2); }
-  .contact-name { font-weight: 500; display: flex; align-items: center; gap: 8px; }
-  .contact-avatar {
-    width: 28px; height: 28px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; flex-shrink: 0;
-  }
-  .status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 5px; }
-  .dot-green { background: var(--green); }
-  .dot-blue { background: var(--blue); }
-  .dot-orange { background: var(--accent2); }
-  .small-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; }
-
-  /* TEAM */
-  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .team-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 20px; text-align: center; cursor: pointer; transition: all 0.15s;
-  }
-  .team-card:hover { border-color: var(--blue); transform: translateY(-2px); }
-  .team-avatar {
-    width: 52px; height: 52px; border-radius: 50%; margin: 0 auto 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px;
-  }
-  .team-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
-  .team-role { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
-  .team-presence {
-    font-size: 11px; display: flex; align-items: center; justify-content: center; gap: 4px;
-  }
-
-  /* KPI CHART */
-  .kpi-bar-chart { display: flex; flex-direction: column; gap: 10px; }
-  .kpi-row { display: flex; align-items: center; gap: 12px; }
-  .kpi-label { font-size: 12px; color: var(--muted); min-width: 130px; }
-  .kpi-bar-wrap { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
-  .kpi-bar { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
-  .kpi-val { font-size: 12px; font-weight: 600; min-width: 30px; text-align: right; }
-
-  /* PANEL OVERLAY */
-  .panel-overlay {
-    display: none;
-    position: fixed; inset: 0; z-index: 100;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    align-items: center; justify-content: center;
-  }
-  .panel-overlay.open { display: flex; }
-  .panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    width: 520px;
-    max-width: 90vw;
-    animation: slideUp 0.2s ease;
-    position: relative;
-  }
-  @keyframes slideUp { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: none; } }
-  .panel-close {
-    position: absolute; top: 16px; right: 16px;
-    background: var(--surface2); border: 1px solid var(--border);
-    width: 30px; height: 30px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 16px; color: var(--muted); transition: all 0.15s;
-  }
-  .panel-close:hover { background: var(--border); color: var(--text); }
-  .panel h3 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 20px; }
-  .form-row { margin-bottom: 16px; }
-  .form-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block; }
-  .form-input {
-    width: 100%; background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 14px;
-    font-family: 'DM Sans', sans-serif; outline: none; transition: border 0.15s;
-  }
-  .form-input:focus { border-color: var(--accent); }
-  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .panel-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
-
-  /* PAGE SECTIONS */
-  .page { display: none; }
-  .page.active { display: block; }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-  /* MINI CALENDAR */
-  .mini-cal { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
-  .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  .cal-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; }
-  .cal-nav { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 14px; padding: 2px 6px; }
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
-  .cal-day-label { text-align: center; font-size: 10px; color: var(--muted); padding: 4px 0; }
-  .cal-day {
-    text-align: center; font-size: 12px; padding: 5px 2px;
-    border-radius: 6px; cursor: pointer; transition: background 0.1s;
-  }
-  .cal-day:hover:not(.empty) { background: var(--surface2); }
-  .cal-day.has-event { color: var(--accent); font-weight: 700; }
-  .cal-day.today { background: var(--accent); color: #fff; font-weight: 700; }
-  .cal-day.empty { cursor: default; }
-
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .page.active { animation: fadeIn 0.2s ease; }
+:root{--red:#e8343c;--violet:#3d2b7a;--bg:#f1f5f9;--white:#fff;--border:#e2e8f0;--text:#1e293b;--muted:#64748b;--light:#94a3b8;--green:#10b981;--orange:#f59e0b;--blue:#3b82f6;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);display:flex;height:100vh;overflow:hidden;font-size:13px;}
+/* SIDEBAR */
+.sb{width:200px;min-width:200px;background:var(--white);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;overflow-y:auto;}
+.sb-logo{padding:16px 14px 12px;border-bottom:1px solid var(--border);}
+.logo-top{font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+.logo-main{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:var(--red);text-transform:uppercase;line-height:1.1;}
+.logo-sub{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;}
+.nav{flex:1;padding:8px;}
+.nav-lbl{font-size:9px;font-weight:600;color:var(--light);letter-spacing:.1em;text-transform:uppercase;padding:8px 8px 3px;}
+.ni{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:6px;cursor:pointer;font-size:12px;color:var(--muted);border:none;background:none;width:100%;text-align:left;font-family:'Barlow',sans-serif;transition:all .12s;}
+.ni:hover{background:var(--bg);color:var(--text);}
+.ni.active{background:#fef2f2;color:var(--red);font-weight:600;}
+.ni-ico{width:14px;height:14px;opacity:.5;flex-shrink:0;}
+.ni.active .ni-ico{opacity:1;}
+.nsub{margin-left:21px;display:flex;flex-direction:column;gap:1px;}
+.nsi{padding:5px 8px;border-radius:5px;font-size:11px;color:var(--muted);cursor:pointer;border:none;background:none;text-align:left;font-family:'Barlow',sans-serif;width:100%;transition:all .12s;}
+.nsi:hover{background:var(--bg);color:var(--text);}
+.nsi.active{color:var(--red);font-weight:600;}
+.sb-foot{padding:10px 8px;border-top:1px solid var(--border);}
+.user-row{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:6px;border:1px solid var(--border);cursor:pointer;}
+.av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:9px;color:#fff;flex-shrink:0;}
+.un{font-size:11px;font-weight:600;}
+.ur{font-size:10px;color:var(--muted);}
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:0 22px;height:50px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.topbar h1{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;}
+.tba{display:flex;gap:6px;align-items:center;}
+.btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:5px;font-size:11px;font-weight:500;cursor:pointer;border:none;font-family:'Barlow',sans-serif;transition:all .12s;}
+.bp{background:var(--red);color:#fff;}.bp:hover{background:#c0272e;}
+.bg{background:var(--white);color:var(--text);border:1px solid var(--border);}.bg:hover{background:var(--bg);}
+.bk{background:var(--back-btn,var(--white));}.back{font-size:12px;color:var(--muted);}
+.content{flex:1;overflow-y:auto;padding:20px 22px;}
+/* PAGE */
+.page{display:none;}.page.active{display:block;animation:fi .15s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+/* STATS */
+.sg{display:grid;gap:12px;margin-bottom:16px;}
+.s4{grid-template-columns:repeat(4,1fr);}.s3{grid-template-columns:repeat(3,1fr);}.s2{grid-template-columns:1fr 1fr;}
+.sc{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:13px 15px;border-left:3px solid var(--red);}
+.sc.bl{border-left-color:var(--blue);}.sc.gr{border-left-color:var(--green);}.sc.or{border-left-color:var(--orange);}.sc.vi{border-left-color:var(--violet);}
+.sl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;font-weight:500;}
+.sv{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;line-height:1;}
+.ss{font-size:10px;color:var(--light);margin-top:2px;}
+/* CARD */
+.card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:14px;}
+.ch{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.ct{font-size:13px;font-weight:600;}
+.cb{padding:15px 16px;}
+/* LIST */
+.lf{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;gap:6px;align-items:center;}
+.sw{display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:5px 10px;flex:1;max-width:260px;}
+.sw input{border:none;background:none;outline:none;font-size:11px;color:var(--text);font-family:'Barlow',sans-serif;width:100%;}
+.li{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s;}
+.li:last-child{border-bottom:none;}.li:hover{background:#fafbfc;}
+.lic{width:38px;height:38px;border-radius:7px;background:var(--bg);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.lib{flex:1;min-width:0;}
+.lit{font-size:13px;font-weight:600;margin-bottom:1px;}
+.lis{font-size:11px;color:var(--muted);margin-bottom:5px;}
+.lim{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.lia{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+/* TAG */
+.tag{display:inline-flex;align-items:center;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+.tr{background:#fef2f2;color:var(--red);}.tv{background:#ede9f8;color:var(--violet);}.tg{background:#ecfdf5;color:var(--green);}.to{background:#fffbeb;color:var(--orange);}.tb{background:#eff6ff;color:var(--blue);}.tgr{background:var(--bg);color:var(--muted);border:1px solid var(--border);}
+/* PROG */
+.pw{width:80px;}.pl{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-bottom:2px;}
+.pb{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.pf{height:100%;border-radius:2px;background:var(--red);}
+.pf.gr{background:var(--green);}.pf.bl{background:var(--blue);}.pf.or{background:var(--orange);}
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+/* TEAM CARD */
+.tc{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:15px;text-align:center;cursor:pointer;transition:all .12s;}
+.tc:hover{border-color:var(--red);}
+.tav{width:42px;height:42px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;color:#fff;}
+.tn{font-size:12px;font-weight:600;margin-bottom:1px;}
+.tr2{font-size:10px;color:var(--muted);margin-bottom:8px;}
+.dot{width:5px;height:5px;border-radius:50%;display:inline-block;}
+.dg{background:var(--green);}.do{background:var(--orange);}.db{background:var(--blue);}
+.pres{display:inline-flex;align-items:center;gap:3px;font-size:10px;}
+/* TABS */
+.tabs{display:flex;margin-bottom:14px;border-bottom:1px solid var(--border);}
+.tab{padding:8px 14px;font-size:11px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--muted);font-family:'Barlow',sans-serif;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s;}
+.tab:hover{color:var(--text);}.tab.active{color:var(--red);border-bottom-color:var(--red);font-weight:600;}
+/* DETAIL */
+.dg2{display:grid;grid-template-columns:1fr 280px;gap:14px;}
+.dr{display:flex;align-items:flex-start;gap:6px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.dr:last-child{border-bottom:none;}
+.dk{color:var(--muted);min-width:110px;flex-shrink:0;font-size:11px;}
+.dv{color:var(--text);font-weight:500;}
+/* KPI */
+.kr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.kl{font-size:11px;color:var(--muted);min-width:120px;}
+.kbw{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden;}
+.kb{height:100%;border-radius:3px;}
+.kv{font-size:11px;font-weight:600;min-width:28px;text-align:right;}
+/* GANTT */
+.gantt{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:auto;}
+.gr-row{display:grid;border-bottom:1px solid var(--border);}
+.gr-row:last-child{border-bottom:none;}
+.gl{padding:6px 10px;font-size:11px;font-weight:500;border-right:1px solid var(--border);background:var(--bg);display:flex;align-items:center;min-width:120px;}
+.gl.hdr{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;}
+.gc{border-right:1px solid var(--border);height:30px;min-width:18px;}
+.gc.we{background:var(--border);}
+.gc.off{background:rgba(232,52,60,.1);}
+.gc.mis{background:rgba(59,130,246,.1);}
+.gc.hdr{height:22px;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);}
+.gc.today{background:rgba(232,52,60,.05);outline:1px solid rgba(232,52,60,.2);}
+/* MONTH CAL */
+.mcal{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.mgrid{display:grid;grid-template-columns:repeat(7,1fr);}
+.mdl{text-align:center;font-size:9px;color:var(--muted);padding:6px 2px;font-weight:600;border-bottom:1px solid var(--border);}
+.md{min-height:60px;padding:4px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);cursor:pointer;}
+.md:hover{background:#fafbfc;}.md.om{background:var(--bg);}
+.md.today .dn{background:var(--red);color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;}
+.dn{font-size:10px;font-weight:500;margin-bottom:2px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;}
+.dn.we{color:var(--light);}
+.me{font-size:9px;font-weight:500;padding:1px 4px;border-radius:2px;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.me.red{background:#fef2f2;color:var(--red);}.me.blue{background:#eff6ff;color:var(--blue);}.me.green{background:#ecfdf5;color:var(--green);}.me.orange{background:#fffbeb;color:var(--orange);}
+/* MODAL */
+.mo{display:none;position:fixed;inset:0;z-index:200;background:rgba(15,15,30,.4);align-items:center;justify-content:center;}
+.mo.open{display:flex;}
+.modal{background:var(--white);border-radius:9px;padding:24px;width:480px;max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.12);animation:mi .15s ease;}
+@keyframes mi{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.modal h3{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;margin-bottom:16px;}
+.fr{margin-bottom:12px;}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.fl{display:block;font-size:10px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;}
+.fi{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:7px 10px;color:var(--text);font-size:12px;font-family:'Barlow',sans-serif;outline:none;}
+.fi:focus{border-color:var(--red);background:var(--white);}
+.mf{display:flex;justify-content:flex-end;gap:6px;margin-top:4px;padding-top:14px;border-top:1px solid var(--border);}
+::-webkit-scrollbar{width:3px;height:3px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="logo">
-    <div class="logo-badge"><span>🚀 FTCA</span></div>
-    <h2>Côte d'Azur<br>Région Sud</h2>
+<aside class="sb">
+  <div class="sb-logo">
+    <div class="logo-top">La French Tech</div>
+    <div class="logo-main">Côte d'Azur</div>
+    <div class="logo-sub">Région Sud</div>
   </div>
-
-  <div class="nav-section">
-    <div class="nav-label">Vue d'ensemble</div>
-    <div class="nav-item active" onclick="showPage('dashboard')">
-      <span class="icon">⬡</span> Tableau de bord
-    </div>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-label">Modules</div>
-    <div class="nav-item" onclick="showPage('events')">
-      <span class="icon">📅</span> Événements
-      <span class="badge">8</span>
-    </div>
-    <div class="nav-item" onclick="showPage('crm')">
-      <span class="icon">🏢</span> CRM & Partenaires
-    </div>
-    <div class="nav-item" onclick="showPage('startups')">
-      <span class="icon">🚀</span> Start-ups
-      <span class="badge green">47</span>
-    </div>
-    <div class="nav-item" onclick="showPage('team')">
-      <span class="icon">👥</span> Équipe & RH
-    </div>
-    <div class="nav-item" onclick="showPage('kpi')">
-      <span class="icon">📊</span> KPIs & Data
-    </div>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-label">Outils</div>
-    <div class="nav-item" onclick="showPage('appels')">
-      <span class="icon">📋</span> Appels à projets
-    </div>
-    <div class="nav-item">
-      <span class="icon">📬</span> Newsletter
-    </div>
-    <div class="nav-item">
-      <span class="icon">📦</span> Matériel
-    </div>
-  </div>
-
-  <div class="sidebar-footer">
-    <div class="user-card">
-      <div class="avatar">JC</div>
-      <div class="user-info">
-        <div class="user-name">Joël Constant</div>
-        <div class="user-role">Administrateur</div>
-      </div>
+  <nav class="nav">
+    <button class="ni active" onclick="go('dash',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Tableau de bord</button>
+    <div class="nav-lbl">CRM</div>
+    <button class="ni" onclick="go('entites',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Entités</button>
+    <button class="ni" onclick="go('contacts',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Contacts</button>
+    <div class="nav-lbl">Activité</div>
+    <button class="ni" onclick="go('events',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Événements</button>
+    <button class="ni" onclick="go('partenariats',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Partenariats</button>
+    <button class="ni" onclick="go('projets',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Projets internes</button>
+    <button class="ni" onclick="go('aap',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Appels à projets</button>
+    <div class="nav-lbl">Équipe</div>
+    <button class="ni" onclick="go('team',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Équipe & Congés</button>
+    <div class="nav-lbl">Analyse</div>
+    <button class="ni" onclick="go('kpi',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>KPIs</button>
+    <div class="nav-lbl">Config</div>
+    <button class="ni" onclick="go('param',this)"><svg class="ni-ico" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Paramétrage</button>
+  </nav>
+  <div class="sb-foot">
+    <div class="user-row">
+      <div class="av" style="background:linear-gradient(135deg,#e8343c,#ff6b35)">LD</div>
+      <div><div class="un">Laura Durand</div><div class="ur">Admin</div></div>
     </div>
   </div>
 </aside>
 
-<!-- MAIN -->
 <main class="main">
 
-  <!-- DASHBOARD -->
-  <div id="page-dashboard" class="page active">
-    <div class="topbar">
-      <h1>Tableau de bord</h1>
-      <div class="topbar-actions">
-        <button class="btn btn-ghost">🔔 Notifications</button>
-        <button class="btn btn-primary" onclick="openPanel('panel-event')">+ Nouvel événement</button>
-      </div>
+<!-- DASHBOARD -->
+<div id="p-dash" class="page active">
+  <div class="topbar"><div class="topbar-left"><h1>👋 Bonjour Laura</h1></div><div class="tba"><button class="btn bp" onclick="om('m-evt')">+ Événement</button></div></div>
+  <div class="content">
+    <div class="sg s4">
+      <div class="sc"><div class="sl">Événements / mois</div><div class="sv">8</div><div class="ss">↑ +2 vs fév.</div></div>
+      <div class="sc bl"><div class="sl">Start-ups</div><div class="sv">47</div><div class="ss">12 en accompagnement</div></div>
+      <div class="sc gr"><div class="sl">Partenaires actifs</div><div class="sv">134</div></div>
+      <div class="sc vi"><div class="sl">Appels à projets</div><div class="sv">3</div><div class="ss">2 ouverts</div></div>
     </div>
-    <div class="content">
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-label">Événements ce mois</div>
-          <div class="stat-value">8</div>
-          <div class="stat-trend">↑ +2 vs mois dernier</div>
+    <div class="g2">
+      <div>
+        <div class="card">
+          <div class="ch"><span class="ct">Prochains événements</span><button class="btn bg" onclick="go('events',null)" style="font-size:10px;padding:4px 8px">Voir tout →</button></div>
+          <div class="li" onclick="om('m-evtd')"><div class="lic">📅</div><div class="lib"><div class="lit">Afterwork FT #12</div><div class="lis">14 mars · Le Booster · 18h</div><div class="lim"><span class="tag tr">Networking</span><div class="pw"><div class="pl"><span>Places</span><span>120/150</span></div><div class="pb"><div class="pf" style="width:80%"></div></div></div></div></div></div>
+          <div class="li" onclick="om('m-evtd')"><div class="lic">🏆</div><div class="lib"><div class="lit">Demo Day Printemps</div><div class="lis">21 mars · Palais des Congrès</div><div class="lim"><span class="tag tv">Concours</span><div class="pw"><div class="pl"><span>Places</span><span>48/200</span></div><div class="pb"><div class="pf bl" style="width:24%"></div></div></div></div></div></div>
+          <div class="li"><div class="lic">⚽</div><div class="lib"><div class="lit">OGC Nice vs Marseille</div><div class="lis">27 mars · Allianz Riviera</div><div class="lim"><span class="tag tg">Sport</span><div class="pw"><div class="pl"><span>Quota</span><span>7/10</span></div><div class="pb"><div class="pf gr" style="width:70%"></div></div></div></div></div></div>
         </div>
-        <div class="stat-card blue">
-          <div class="stat-label">Start-ups suivies</div>
-          <div class="stat-value" style="color:var(--blue)">47</div>
-          <div class="stat-sub">12 en cours d'accompagnement</div>
-        </div>
-        <div class="stat-card green">
-          <div class="stat-label">Partenaires actifs</div>
-          <div class="stat-value" style="color:var(--green)">134</div>
-          <div class="stat-trend">↑ +8 ce trimestre</div>
-        </div>
-        <div class="stat-card orange">
-          <div class="stat-label">Appels à projets</div>
-          <div class="stat-value" style="color:var(--accent2)">3</div>
-          <div class="stat-sub">2 en cours • 1 clôturé</div>
+        <div class="card">
+          <div class="ch"><span class="ct">Candidatures récentes</span><button class="btn bg" onclick="go('aap',null)" style="font-size:10px;padding:4px 8px">Voir tout →</button></div>
+          <div class="li"><div class="lic" style="background:#eff6ff;color:var(--blue);font-weight:700;font-size:12px">AM</div><div class="lib"><div class="lit">AlgoMed</div><div class="lis">Prix Innovation Sud · il y a 2h</div></div><span class="tag to">Reçue</span></div>
+          <div class="li"><div class="lic" style="background:#ecfdf5;color:var(--green);font-weight:700;font-size:12px">GR</div><div class="lib"><div class="lit">GreenRoute</div><div class="lis">Prix Innovation Sud · hier</div></div><span class="tag tb">En cours</span></div>
         </div>
       </div>
-
-      <div class="two-col">
-        <div>
-          <div class="section-header">
-            <span class="section-title">Prochains événements</span>
-            <button class="btn btn-ghost" onclick="showPage('events')" style="font-size:12px;padding:6px 12px">Voir tout →</button>
-          </div>
-          <div class="event-list">
-            <div class="event-card" onclick="showPage('events')">
-              <div class="event-date-block"><div class="event-day">14</div><div class="event-month">Mars</div></div>
-              <div class="event-info">
-                <div class="event-name">Afterwork French Tech #12</div>
-                <div class="event-meta"><span>📍 Le Booster, Nice</span><span>18h00</span></div>
-              </div>
-              <div class="event-tags">
-                <span class="tag tag-red">Networking</span>
-              </div>
-            </div>
-            <div class="event-card" onclick="showPage('events')">
-              <div class="event-date-block"><div class="event-day">21</div><div class="event-month">Mars</div></div>
-              <div class="event-info">
-                <div class="event-name">Demo Day Printemps 2026</div>
-                <div class="event-meta"><span>📍 Palais des Congrès</span><span>09h00</span></div>
-              </div>
-              <div class="event-tags">
-                <span class="tag tag-blue">Concours</span>
-              </div>
-            </div>
-            <div class="event-card" onclick="showPage('events')">
-              <div class="event-date-block"><div class="event-day">03</div><div class="event-month">Avr</div></div>
-              <div class="event-info">
-                <div class="event-name">Mission France-Italie</div>
-                <div class="event-meta"><span>📍 Turin</span><span>Projet européen</span></div>
-              </div>
-              <div class="event-tags">
-                <span class="tag tag-orange">Projet</span>
-              </div>
-            </div>
-          </div>
+      <div>
+        <div class="card">
+          <div class="ch"><span class="ct">Équipe — aujourd'hui</span></div>
+          <div class="li"><div class="av" style="background:linear-gradient(135deg,#e8343c,#ff6b35);width:30px;height:30px;font-size:10px">LD</div><div class="lib"><div class="lit" style="font-size:12px">Laura Durand</div><div style="font-size:10px;color:var(--muted)">Directrice</div></div><span class="pres"><span class="dot dg"></span><span style="color:var(--green);font-size:10px">Présente</span></span></div>
+          <div class="li"><div class="av" style="background:linear-gradient(135deg,#3b82f6,#6a4fff);width:30px;height:30px;font-size:10px">SC</div><div class="lib"><div class="lit" style="font-size:12px">Sophie Caron</div><div style="font-size:10px;color:var(--muted)">Événements</div></div><span class="pres"><span class="dot do"></span><span style="color:var(--orange);font-size:10px">Congé</span></span></div>
+          <div class="li"><div class="av" style="background:linear-gradient(135deg,#10b981,#06d6a0);width:30px;height:30px;font-size:10px">MA</div><div class="lib"><div class="lit" style="font-size:12px">Marc Aveline</div><div style="font-size:10px;color:var(--muted)">Chargé de mission</div></div><span class="pres"><span class="dot dg"></span><span style="color:var(--green);font-size:10px">Présent</span></span></div>
+          <div class="li"><div class="av" style="background:linear-gradient(135deg,#a855f7,#6a4fff);width:30px;height:30px;font-size:10px">LB</div><div class="lib"><div class="lit" style="font-size:12px">Léa Bernard</div><div style="font-size:10px;color:var(--muted)">Community</div></div><span class="pres"><span class="dot db"></span><span style="color:var(--blue);font-size:10px">Mission</span></span></div>
         </div>
-
-        <div>
-          <div class="section-header">
-            <span class="section-title">Mars 2026</span>
-          </div>
-          <div class="mini-cal">
-            <div class="cal-header">
-              <span class="cal-title">Mars 2026</span>
-              <div><button class="cal-nav">‹</button><button class="cal-nav">›</button></div>
-            </div>
-            <div class="cal-grid">
-              <div class="cal-day-label">L</div><div class="cal-day-label">M</div><div class="cal-day-label">M</div><div class="cal-day-label">J</div><div class="cal-day-label">V</div><div class="cal-day-label">S</div><div class="cal-day-label">D</div>
-              <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
-              <div class="cal-day">1</div><div class="cal-day">2</div>
-              <div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div>
-              <div class="cal-day today">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day has-event">14</div><div class="cal-day">15</div><div class="cal-day">16</div>
-              <div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day has-event">21</div><div class="cal-day">22</div><div class="cal-day">23</div>
-              <div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day has-event">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div>
-              <div class="cal-day">31</div>
-            </div>
-          </div>
-
-          <div style="margin-top:20px">
-            <div class="section-header"><span class="section-title">Congés & absences</span></div>
-            <div class="mini-cal">
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px">
-                  <div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:24px;height:24px;font-size:10px">SC</div>Sophie C.</div>
-                  <span class="tag tag-orange">Congé 18-22 mars</span>
-                </div>
-                <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px">
-                  <div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:24px;height:24px;font-size:10px;background:linear-gradient(135deg,var(--blue),#6a4fff)">MA</div>Marc A.</div>
-                  <span class="tag tag-green">Présent</span>
-                </div>
-                <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px">
-                  <div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:24px;height:24px;font-size:10px;background:linear-gradient(135deg,var(--green),#0fa)">LB</div>Léa B.</div>
-                  <span class="tag tag-blue">Mission Italie</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="card">
+          <div class="ch"><span class="ct">Congé en attente</span></div>
+          <div class="li"><div class="av" style="background:linear-gradient(135deg,#a855f7,#6a4fff);width:30px;height:30px;font-size:10px">LB</div><div class="lib"><div class="lit" style="font-size:12px">Léa Bernard</div><div style="font-size:10px;color:var(--muted)">3–5 avril · CP · 3j</div></div><div class="lia"><button class="btn bg" style="font-size:10px;padding:3px 7px">✗</button><button class="btn bp" style="font-size:10px;padding:3px 7px">✓</button></div></div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- EVENTS PAGE -->
-  <div id="page-events" class="page">
-    <div class="topbar">
-      <h1>Événements</h1>
-      <div class="topbar-actions">
-        <button class="btn btn-ghost">Vue calendrier</button>
-        <button class="btn btn-primary" onclick="openPanel('panel-event')">+ Créer un événement</button>
+<!-- ENTITÉS -->
+<div id="p-entites" class="page">
+  <div class="topbar"><div class="topbar-left"><h1>CRM — Entités</h1></div><div class="tba"><button class="btn bg">📤 Exporter</button><button class="btn bp" onclick="om('m-entite')">+ Entité</button></div></div>
+  <div class="content">
+    <div class="tabs"><button class="tab active" onclick="at(this)">Toutes</button><button class="tab" onclick="at(this)">Start-ups</button><button class="tab" onclick="at(this)">Partenaires</button><button class="tab" onclick="at(this)">Institutions</button></div>
+    <div class="card">
+      <div class="lf"><div class="sw"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Rechercher…"></div></div>
+      <div class="li" onclick="go('fiche-entite',null)"><div class="lic" style="background:#eff6ff;color:var(--blue);font-weight:700;font-size:11px">AM</div><div class="lib"><div class="lit">AlgoMed</div><div class="lis">IA diagnostique · Sophie Laurent</div><div class="lim"><span class="tag tb">HealthTech</span><span class="tag tgr">Seed</span><span class="tag tv">Start-up</span></div></div><div class="lia"><span style="font-size:10px;color:var(--muted)">1 contact</span><button class="btn bg" style="font-size:10px;padding:3px 7px">Ouvrir</button></div></div>
+      <div class="li" onclick="go('fiche-entite',null)"><div class="lic" style="background:#ecfdf5;color:var(--green);font-weight:700;font-size:11px">GR</div><div class="lib"><div class="lit">GreenRoute</div><div class="lis">Mobilité décarbonée · Thomas Bernard</div><div class="lim"><span class="tag tg">CleanTech</span><span class="tag to">Série A</span><span class="tag tv">Start-up</span></div></div><div class="lia"><span style="font-size:10px;color:var(--muted)">2 contacts</span><button class="btn bg" style="font-size:10px;padding:3px 7px">Ouvrir</button></div></div>
+      <div class="li"><div class="lic" style="background:#fef2f2;color:var(--red);font-weight:700;font-size:11px">CCI</div><div class="lib"><div class="lit">CCI Nice Côte d'Azur</div><div class="lis">Chambre de Commerce et d'Industrie</div><div class="lim"><span class="tag tr">Institution publique</span><span class="tag tg">Actif</span></div></div><div class="lia"><span style="font-size:10px;color:var(--muted)">3 contacts</span><button class="btn bg" style="font-size:10px;padding:3px 7px">Ouvrir</button></div></div>
+      <div class="li"><div class="lic" style="background:#ede9f8;color:var(--violet);font-weight:700;font-size:11px">BPI</div><div class="lib"><div class="lit">BPI France PACA</div><div class="lis">Banque publique d'investissement</div><div class="lim"><span class="tag tv">Investisseur</span><span class="tag tg">Actif</span></div></div><div class="lia"><span style="font-size:10px;color:var(--muted)">2 contacts</span><button class="btn bg" style="font-size:10px;padding:3px 7px">Ouvrir</button></div></div>
+      <div class="li"><div class="lic" style="background:#fffbeb;color:var(--orange);font-weight:700;font-size:11px">OGC</div><div class="lib"><div class="lit">OGC Nice</div><div class="lis">Club de football — partenaire sport</div><div class="lim"><span class="tag to">Offreur de services</span><span class="tag tg">Actif</span></div></div><div class="lia"><span style="font-size:10px;color:var(--muted)">1 contact</span><button class="btn bg" style="font-size:10px;padding:3px 7px">Ouvrir</button></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FICHE ENTITÉ -->
+<div id="p-fiche-entite" class="page">
+  <div class="topbar"><div class="topbar-left"><button class="btn bg back" onclick="go('entites',null)">← Entités</button><h1 style="margin-left:8px">AlgoMed</h1></div><div class="tba"><button class="btn bg">✏️ Modifier</button></div></div>
+  <div class="content">
+    <div class="dg2">
+      <div>
+        <div class="card"><div class="ch"><span class="ct">Informations</span></div><div class="cb">
+          <div class="dr"><span class="dk">Type</span><span class="dv"><span class="tag tv">Start-up</span></span></div>
+          <div class="dr"><span class="dk">Secteur</span><span class="dv"><span class="tag tb">HealthTech</span></span></div>
+          <div class="dr"><span class="dk">Stade</span><span class="dv"><span class="tag tgr">Seed</span></span></div>
+          <div class="dr"><span class="dk">Statut</span><span class="dv"><span class="tag tg">Actif</span></span></div>
+          <div class="dr"><span class="dk">Site web</span><span class="dv" style="color:var(--blue)">algomed.io</span></div>
+        </div></div>
+        <div class="card"><div class="ch"><span class="ct">Historique</span></div>
+          <div class="li"><div class="lib"><div class="lit" style="font-size:12px">Candidature Prix Innovation Sud 2026</div><div style="font-size:10px;color:var(--muted)">10 mars 2026 · Reçue</div></div><span class="tag to">AAP</span></div>
+          <div class="li"><div class="lib"><div class="lit" style="font-size:12px">Afterwork FT #11</div><div style="font-size:10px;color:var(--muted)">14 févr. 2026</div></div><span class="tag tr">Événement</span></div>
+          <div class="li"><div class="lib"><div class="lit" style="font-size:12px">Mise en relation — GreenRoute</div><div style="font-size:10px;color:var(--muted)">8 janv. 2026 · Marc Aveline</div></div><span class="tag tv">Réseau</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card"><div class="ch"><span class="ct">Contact rattaché</span></div>
+          <div class="li"><div class="av" style="background:linear-gradient(135deg,#3b82f6,#6a4fff);width:32px;height:32px;font-size:10px">SL</div><div class="lib"><div class="lit" style="font-size:12px">Sophie Laurent</div><div style="font-size:10px;color:var(--muted)">CEO · Fondatrice</div><div style="font-size:10px;color:var(--muted)">s.laurent@algomed.io</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px" onclick="go('fiche-contact',null)">→</button></div>
+        </div>
+        <div class="card"><div class="ch"><span class="ct">Fondateurs</span></div><div class="cb">
+          <div class="dr"><span class="dk">Fondatrice</span><span class="dv">Mme Sophie Laurent</span></div>
+          <div class="dr"><span class="dk">Co-fondateur</span><span class="dv">M. Rami Benali</span></div>
+          <div style="margin-top:8px;padding:7px 10px;background:#ecfdf5;border-radius:5px;font-size:10px;color:var(--green);font-weight:500">✓ 1/2 fondatrices → KPI diversité</div>
+        </div></div>
       </div>
     </div>
-    <div class="content">
-      <div class="tabs">
-        <button class="tab active">Tous</button>
-        <button class="tab">À venir</button>
-        <button class="tab">Passés</button>
-        <button class="tab">Modèles</button>
-      </div>
-      <div class="stats-row" style="grid-template-columns:repeat(3,1fr)">
-        <div class="stat-card"><div class="stat-label">Cette année</div><div class="stat-value">40</div><div class="stat-sub">objectif annuel</div></div>
-        <div class="stat-card blue"><div class="stat-label">Inscrits total</div><div class="stat-value" style="color:var(--blue)">1 240</div><div class="stat-trend">↑ +18% vs 2025</div></div>
-        <div class="stat-card green"><div class="stat-label">Taux de présence</div><div class="stat-value" style="color:var(--green)">78%</div><div class="stat-sub">moy. sur 12 mois</div></div>
-      </div>
+  </div>
+</div>
 
-      <div class="event-list">
-        <div class="event-card" onclick="openPanel('panel-event-detail')">
-          <div class="event-date-block"><div class="event-day">14</div><div class="event-month">Mars</div></div>
-          <div class="event-info">
-            <div class="event-name">Afterwork French Tech #12</div>
-            <div class="event-meta"><span>📍 Le Booster, Nice</span><span>18h00 – 21h00</span><span>👤 120 inscrits</span></div>
-          </div>
-          <div class="event-progress">
-            <div class="progress-label"><span>Places</span><span>120/150</span></div>
-            <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
-          </div>
-          <div class="event-tags"><span class="tag tag-red">Networking</span></div>
+<!-- CONTACTS -->
+<div id="p-contacts" class="page">
+  <div class="topbar"><div class="topbar-left"><h1>CRM — Contacts</h1></div><div class="tba"><button class="btn bp" onclick="om('m-contact')">+ Contact</button></div></div>
+  <div class="content">
+    <div class="card">
+      <div class="lf"><div class="sw"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Rechercher…"></div></div>
+      <div class="li" onclick="go('fiche-contact',null)"><div class="av" style="background:linear-gradient(135deg,#3b82f6,#6a4fff);width:36px;height:36px;font-size:12px">SL</div><div class="lib"><div class="lit">Sophie Laurent</div><div class="lis">CEO · AlgoMed · s.laurent@algomed.io</div><div class="lim"><span class="tag tb">HealthTech</span><span class="tag tv">Start-up</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Ouvrir</button></div>
+      <div class="li" onclick="go('fiche-contact',null)"><div class="av" style="background:linear-gradient(135deg,#e8343c,#ff6b35);width:36px;height:36px;font-size:12px">MD</div><div class="lib"><div class="lit">Marie Dupont</div><div class="lis">Dir. partenariats · CCI Nice</div><div class="lim"><span class="tag tr">Institution</span><span class="tag tg">Actif</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Ouvrir</button></div>
+      <div class="li"><div class="av" style="background:linear-gradient(135deg,#10b981,#06d6a0);width:36px;height:36px;font-size:12px">TB</div><div class="lib"><div class="lit">Thomas Bernard</div><div class="lis">CEO · GreenRoute · t.bernard@greenroute.fr</div><div class="lim"><span class="tag tg">CleanTech</span><span class="tag to">Série A</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Ouvrir</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- FICHE CONTACT -->
+<div id="p-fiche-contact" class="page">
+  <div class="topbar"><div class="topbar-left"><button class="btn bg back" onclick="go('contacts',null)">← Contacts</button><h1 style="margin-left:8px">Sophie Laurent</h1></div><div class="tba"><button class="btn bg">✏️</button><button class="btn bp">📧 Contacter</button></div></div>
+  <div class="content">
+    <div class="dg2">
+      <div>
+        <div class="card"><div class="ch"><span class="ct">Informations</span></div><div class="cb">
+          <div class="dr"><span class="dk">Civilité</span><span class="dv">Mme</span></div>
+          <div class="dr"><span class="dk">Prénom / Nom</span><span class="dv">Sophie Laurent</span></div>
+          <div class="dr"><span class="dk">Rôle</span><span class="dv">CEO · Fondatrice</span></div>
+          <div class="dr"><span class="dk">Email</span><span class="dv" style="color:var(--blue)">s.laurent@algomed.io</span></div>
+          <div class="dr"><span class="dk">Tél.</span><span class="dv">+33 6 12 34 56 78</span></div>
+          <div class="dr"><span class="dk">Entité</span><span class="dv" style="color:var(--blue);cursor:pointer" onclick="go('fiche-entite',null)">AlgoMed →</span></div>
+          <div class="dr"><span class="dk">Statut</span><span class="dv"><span class="tag tg">Actif</span></span></div>
+        </div></div>
+        <div class="card"><div class="ch"><span class="ct">Participations</span></div>
+          <div class="li"><div class="lib"><div class="lit" style="font-size:12px">Afterwork FT #12</div><div style="font-size:10px;color:var(--muted)">14 mars 2026</div></div><span class="tag tr">Invitée</span></div>
+          <div class="li"><div class="lib"><div class="lit" style="font-size:12px">Demo Day Automne 2025</div><div style="font-size:10px;color:var(--muted)">22 oct. 2025</div></div><span class="tag tv">Participante</span></div>
         </div>
-        <div class="event-card" onclick="openPanel('panel-event-detail')">
-          <div class="event-date-block"><div class="event-day">21</div><div class="event-month">Mars</div></div>
-          <div class="event-info">
-            <div class="event-name">Demo Day Printemps 2026</div>
-            <div class="event-meta"><span>📍 Palais des Congrès, Nice</span><span>09h00 – 18h00</span><span>👤 48 inscrits</span></div>
-          </div>
-          <div class="event-progress">
-            <div class="progress-label"><span>Places</span><span>48/200</span></div>
-            <div class="progress-bar"><div class="progress-fill blue" style="width:24%"></div></div>
-          </div>
-          <div class="event-tags"><span class="tag tag-blue">Concours</span></div>
-        </div>
-        <div class="event-card">
-          <div class="event-date-block"><div class="event-day">27</div><div class="event-month">Mars</div></div>
-          <div class="event-info">
-            <div class="event-name">OGC Nice vs Marseille — Places membres</div>
-            <div class="event-meta"><span>📍 Allianz Riviera</span><span>20h45</span><span>🎟️ 10 places allouées</span></div>
-          </div>
-          <div class="event-progress">
-            <div class="progress-label"><span>Quota</span><span>7/10</span></div>
-            <div class="progress-bar"><div class="progress-fill green" style="width:70%"></div></div>
-          </div>
-          <div class="event-tags"><span class="tag tag-green">Sport</span></div>
-        </div>
-        <div class="event-card">
-          <div class="event-date-block"><div class="event-day">03</div><div class="event-month">Avr</div></div>
-          <div class="event-info">
-            <div class="event-name">Mission France-Italie — Turin</div>
-            <div class="event-meta"><span>📍 Turin, Italie</span><span>3 jours</span><span>👤 12 participants</span></div>
-          </div>
-          <div class="event-progress">
-            <div class="progress-label"><span>Places</span><span>12/15</span></div>
-            <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
-          </div>
-          <div class="event-tags"><span class="tag tag-orange">Projet EU</span></div>
-        </div>
-        <div class="event-card">
-          <div class="event-date-block"><div class="event-day">15</div><div class="event-month">Avr</div></div>
-          <div class="event-info">
-            <div class="event-name">Pitch & Bière — Session startup</div>
-            <div class="event-meta"><span>📍 Station F Nice</span><span>19h00</span><span>👤 35 inscrits</span></div>
-          </div>
-          <div class="event-progress">
-            <div class="progress-label"><span>Places</span><span>35/60</span></div>
-            <div class="progress-bar"><div class="progress-fill blue" style="width:58%"></div></div>
-          </div>
-          <div class="event-tags"><span class="tag tag-blue">Start-ups</span></div>
+      </div>
+      <div>
+        <div class="card"><div class="ch"><span class="ct">Mises en relation</span></div>
+          <div class="li"><div class="lib"><div style="font-weight:600;font-size:12px">Thomas Bernard</div><div style="font-size:10px;color:var(--muted)">GreenRoute · jan. 2026 · Marc Aveline</div></div></div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- CRM PAGE -->
-  <div id="page-crm" class="page">
-    <div class="topbar">
-      <h1>CRM & Partenaires</h1>
-      <div class="topbar-actions">
-        <button class="btn btn-ghost">📤 Exporter</button>
-        <button class="btn btn-primary" onclick="openPanel('panel-contact')">+ Ajouter un contact</button>
-      </div>
-    </div>
-    <div class="content">
-      <div class="tabs">
-        <button class="tab active">Partenaires</button>
-        <button class="tab">Contacts</button>
-        <button class="tab">Institutions</button>
-        <button class="tab">Médias</button>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden">
-        <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;gap:10px">
-          <input class="form-input" placeholder="🔍 Rechercher un partenaire..." style="max-width:320px">
-          <button class="btn btn-ghost">Filtrer ▾</button>
-        </div>
-        <table class="crm-table">
-          <thead>
-            <tr>
-              <th>Organisation</th>
-              <th>Contact</th>
-              <th>Type</th>
-              <th>Statut</th>
-              <th>Événements</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr onclick="openPanel('panel-contact-detail')" style="cursor:pointer">
-              <td><div class="contact-name"><div class="contact-avatar" style="background:rgba(232,52,60,0.15);color:var(--accent)">CG</div>CCI Nice Côte d'Azur</div></td>
-              <td style="color:var(--muted);font-size:12px">Marie Dupont<br>m.dupont@cci-nice.fr</td>
-              <td><span class="tag tag-blue small-tag">Institutionnel</span></td>
-              <td><span class="status-dot dot-green"></span><span style="font-size:12px">Actif</span></td>
-              <td style="font-size:12px;color:var(--muted)">12 événements</td>
-              <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px">Voir</button></td>
-            </tr>
-            <tr onclick="openPanel('panel-contact-detail')" style="cursor:pointer">
-              <td><div class="contact-name"><div class="contact-avatar" style="background:rgba(74,158,255,0.15);color:var(--blue)">OGC</div>OGC Nice</div></td>
-              <td style="color:var(--muted);font-size:12px">Pierre Martin<br>p.martin@ogcnice.com</td>
-              <td><span class="tag tag-orange small-tag">Partenaire Sport</span></td>
-              <td><span class="status-dot dot-green"></span><span style="font-size:12px">Actif</span></td>
-              <td style="font-size:12px;color:var(--muted)">4 matchs / an</td>
-              <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px">Voir</button></td>
-            </tr>
-            <tr style="cursor:pointer">
-              <td><div class="contact-name"><div class="contact-avatar" style="background:rgba(45,212,160,0.15);color:var(--green)">AM</div>Métropole NCA</div></td>
-              <td style="color:var(--muted);font-size:12px">Claire Lebrun<br>c.lebrun@nicecotedazur.fr</td>
-              <td><span class="tag tag-green small-tag">Collectivité</span></td>
-              <td><span class="status-dot dot-blue"></span><span style="font-size:12px">En discussion</span></td>
-              <td style="font-size:12px;color:var(--muted)">7 événements</td>
-              <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px">Voir</button></td>
-            </tr>
-            <tr style="cursor:pointer">
-              <td><div class="contact-name"><div class="contact-avatar" style="background:rgba(255,107,53,0.15);color:var(--accent2)">BPI</div>BPI France PACA</div></td>
-              <td style="color:var(--muted);font-size:12px">Antoine Blanc<br>a.blanc@bpifrance.fr</td>
-              <td><span class="tag tag-red small-tag">Financement</span></td>
-              <td><span class="status-dot dot-green"></span><span style="font-size:12px">Actif</span></td>
-              <td style="font-size:12px;color:var(--muted)">5 événements</td>
-              <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px">Voir</button></td>
-            </tr>
-            <tr style="cursor:pointer">
-              <td><div class="contact-name"><div class="contact-avatar" style="background:rgba(74,158,255,0.15);color:var(--blue)">UA</div>Université Côte d'Azur</div></td>
-              <td style="color:var(--muted);font-size:12px">Prof. Rousseau<br>rousseau@univ-cotedazur.fr</td>
-              <td><span class="tag tag-blue small-tag">Académique</span></td>
-              <td><span class="status-dot dot-orange"></span><span style="font-size:12px">Inactif</span></td>
-              <td style="font-size:12px;color:var(--muted)">2 événements</td>
-              <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px">Voir</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<!-- ÉVÉNEMENTS -->
+<div id="p-events" class="page">
+  <div class="topbar"><div class="topbar-left"><h1>Événements</h1></div><div class="tba"><button class="btn bg" onclick="go('calendrier',null)">📅 Calendrier</button><button class="btn bp" onclick="om('m-evt')">+ Créer</button></div></div>
+  <div class="content">
+    <div class="sg s3"><div class="sc"><div class="sl">Objectif 2026</div><div class="sv">40</div></div><div class="sc bl"><div class="sl">Participants total</div><div class="sv">1 240</div><div class="ss">↑ +18%</div></div><div class="sc gr"><div class="sl">Taux présence</div><div class="sv">78%</div></div></div>
+    <div class="tabs"><button class="tab active" onclick="at(this)">À venir</button><button class="tab" onclick="at(this)">Passés</button></div>
+    <div class="card">
+      <div class="li" onclick="om('m-evtd')"><div class="lic">📅</div><div class="lib"><div class="lit">Afterwork French Tech #12</div><div class="lis">14 mars · Le Booster · 18h–21h</div><div class="lim"><span class="tag tr">Networking</span><div class="pw"><div class="pl"><span>Places</span><span>120/150</span></div><div class="pb"><div class="pf" style="width:80%"></div></div></div></div></div></div>
+      <div class="li" onclick="om('m-evtd')"><div class="lic">🏆</div><div class="lib"><div class="lit">Demo Day Printemps 2026</div><div class="lis">21 mars · Palais des Congrès · journée</div><div class="lim"><span class="tag tv">Concours</span><div class="pw"><div class="pl"><span>Places</span><span>48/200</span></div><div class="pb"><div class="pf bl" style="width:24%"></div></div></div></div></div></div>
+      <div class="li"><div class="lic">🌍</div><div class="lib"><div class="lit">Mission France-Italie — Turin</div><div class="lis">3–5 avril · Turin</div><div class="lim"><span class="tag to">Mission</span><div class="pw"><div class="pl"><span>Places</span><span>12/15</span></div><div class="pb"><div class="pf or" style="width:80%"></div></div></div></div></div></div>
+      <div class="li"><div class="lic">🚀</div><div class="lib"><div class="lit">Pitch & Bière</div><div class="lis">15 avril · Station F Nice · 19h</div><div class="lim"><span class="tag tb">Start-ups</span><div class="pw"><div class="pl"><span>Places</span><span>35/60</span></div><div class="pb"><div class="pf bl" style="width:58%"></div></div></div></div></div></div>
     </div>
   </div>
+</div>
 
-  <!-- START-UPS PAGE -->
-  <div id="page-startups" class="page">
-    <div class="topbar">
-      <h1>Start-ups</h1>
-      <div class="topbar-actions">
-        <button class="btn btn-ghost">📤 Exporter</button>
-        <button class="btn btn-primary">+ Ajouter une start-up</button>
-      </div>
-    </div>
-    <div class="content">
-      <div class="stats-row">
-        <div class="stat-card"><div class="stat-label">Total suivies</div><div class="stat-value">47</div></div>
-        <div class="stat-card green"><div class="stat-label">Fondatrices femmes</div><div class="stat-value" style="color:var(--green)">31%</div><div class="stat-trend">KPI diversité</div></div>
-        <div class="stat-card blue"><div class="stat-label">Mises en relation</div><div class="stat-value" style="color:var(--blue)">128</div></div>
-        <div class="stat-card orange"><div class="stat-label">Levées de fonds</div><div class="stat-value" style="color:var(--accent2)">8</div><div class="stat-sub">ce trimestre</div></div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden">
-        <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;gap:10px">
-          <input class="form-input" placeholder="🔍 Rechercher une start-up..." style="max-width:320px">
-          <button class="btn btn-ghost">Secteur ▾</button>
-          <button class="btn btn-ghost">Stade ▾</button>
-        </div>
-        <table class="crm-table">
-          <thead>
-            <tr><th>Start-up</th><th>Fondateur·rice</th><th>Secteur</th><th>Stade</th><th>Actions</th><th></th></tr>
-          </thead>
-          <tbody>
-            <tr style="cursor:pointer">
-              <td><div class="contact-name"><div class="contact-avatar" style="background:rgba(74,158,255,0.15);color:var(--blue)">AI</div>AlgoMed</div></td>
-              <td style="font-size:12px;color:var(--muted)">Sophie Laurent (F)</td>
-              <td><span class="tag tag-blue small-tag">HealthTech</span></td>
-              <td><span class="tag tag-green small-tag">Seed</span></td>
-              <td style="font-size:12px;color:var(--muted)">3 mises en relation</td>
-              <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px">Voir</button></td>
-            </tr>
-            <tr style="cursor:pointer">
-              <td><div class="contact-name"><div class="contact-avatar" style="background:rgba(232,52,60,0.15);color:var(--accent)">GR</div>GreenRoute</div></td>
-              <td style="font-size:12px;color:var(--muted)">Thomas Bernard</td>
-              <td><span class="tag tag-green small-tag">CleanTech</span></td>
-              <td><span class="tag tag-orange small-tag">Série A</span></td>
-              <td style="font-size:12px;color:var(--muted)">7 mises en relation</td>
-              <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px">Voir</button></td>
-            </tr>
-            <tr style="cursor:pointer">
-              <td><div class="contact-name"><div class="contact-avatar" style="background:rgba(45,212,160,0.15);color:var(--green)">CY</div>CyberGuard</div></td>
-              <td style="font-size:12px;color:var(--muted)">Amina Kadi (F)</td>
-              <td><span class="tag tag-red small-tag">Cybersécurité</span></td>
-              <td><span class="tag tag-blue small-tag">Pre-seed</span></td>
-              <td style="font-size:12px;color:var(--muted)">1 mise en relation</td>
-              <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px">Voir</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<!-- CALENDRIER -->
+<div id="p-calendrier" class="page">
+  <div class="topbar"><div class="topbar-left"><button class="btn bg back" onclick="go('events',null)">← Liste</button><h1 style="margin-left:8px">Calendrier — Mars 2026</h1></div><div class="tba"><button class="btn bp" onclick="om('m-evt')">+ Créer</button></div></div>
+  <div class="content">
+    <div class="mcal">
+      <div class="mgrid"><div class="mdl">Lun</div><div class="mdl">Mar</div><div class="mdl">Mer</div><div class="mdl">Jeu</div><div class="mdl">Ven</div><div class="mdl" style="color:var(--light)">Sam</div><div class="mdl" style="color:var(--light)">Dim</div></div>
+      <div class="mgrid" id="mcal-grid"></div>
     </div>
   </div>
+</div>
 
-  <!-- TEAM PAGE -->
-  <div id="page-team" class="page">
-    <div class="topbar">
-      <h1>Équipe & RH</h1>
-      <div class="topbar-actions">
-        <button class="btn btn-ghost">Voir le planning</button>
-        <button class="btn btn-primary">+ Demande de congé</button>
-      </div>
+<!-- PARTENARIATS -->
+<div id="p-partenariats" class="page">
+  <div class="topbar"><div class="topbar-left"><h1>Partenariats & Tarifs négociés</h1></div><div class="tba"><button class="btn bp" onclick="om('m-part')">+ Partenariat</button></div></div>
+  <div class="content">
+    <div class="sg s3"><div class="sc"><div class="sl">Partenariats actifs</div><div class="sv">8</div></div><div class="sc or"><div class="sl">Places restantes</div><div class="sv">3</div><div class="ss">OGC Nice</div></div><div class="sc bl"><div class="sl">Tarifs négociés</div><div class="sv">5</div></div></div>
+    <div class="card"><div class="ch"><span class="ct">Avantages & quotas</span></div>
+      <div class="li"><div class="lic">⚽</div><div class="lib"><div class="lit">Places OGC Nice — Saison 2025/26</div><div class="lis">10 places/an · offreur de services</div><div class="lim"><div class="pw" style="width:110px"><div class="pl"><span>Quota</span><span>7/10</span></div><div class="pb"><div class="pf or" style="width:70%"></div></div></div><span class="tag to">3 restantes</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Gérer</button></div>
+      <div class="li"><div class="lic">💼</div><div class="lib"><div class="lit">Hébergement cloud OVH</div><div class="lis">-30% offres Pro · déc. 2026</div><div class="lim"><span class="tag tg">Actif</span><span class="tag tgr">Tarif négocié</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Voir</button></div>
+      <div class="li"><div class="lic">⚖️</div><div class="lib"><div class="lit">Accompagnement juridique — Morin</div><div class="lis">2h offertes par membre · 2026</div><div class="lim"><span class="tag tg">Actif</span><span class="tag tgr">Tarif négocié</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Voir</button></div>
     </div>
-    <div class="content">
-      <div class="section-header"><span class="section-title">Membres de l'équipe</span></div>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-avatar" style="background:linear-gradient(135deg,var(--accent),var(--accent2))">LD</div>
-          <div class="team-name">Laura Durand</div>
-          <div class="team-role">Directrice</div>
-          <div class="team-presence"><span class="status-dot dot-green"></span> Présente</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar" style="background:linear-gradient(135deg,var(--blue),#6a4fff)">SC</div>
-          <div class="team-name">Sophie Caron</div>
-          <div class="team-role">Chargée d'événements</div>
-          <div class="team-presence"><span class="status-dot dot-orange"></span> Congé 18-22 mars</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar" style="background:linear-gradient(135deg,var(--green),#0fa)">MA</div>
-          <div class="team-name">Marc Aveline</div>
-          <div class="team-role">Chargé de mission</div>
-          <div class="team-presence"><span class="status-dot dot-green"></span> Présent</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar" style="background:linear-gradient(135deg,#a855f7,#6a4fff)">LB</div>
-          <div class="team-name">Léa Bernard</div>
-          <div class="team-role">Community Manager</div>
-          <div class="team-presence"><span class="status-dot dot-blue"></span> Mission Italie</div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">RN</div>
-          <div class="team-name">Romain Navarro</div>
-          <div class="team-role">Chargé de comm.</div>
-          <div class="team-presence"><span class="status-dot dot-green"></span> Présent</div>
-        </div>
-        <div class="team-card" style="border-style:dashed;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--muted);font-size:13px">
-          <div style="font-size:24px">+</div>
-          <div>Inviter un membre</div>
-        </div>
-      </div>
+    <div class="card"><div class="ch"><span class="ct">Attributions OGC Nice</span></div>
+      <div class="li"><div class="av" style="background:linear-gradient(135deg,#e8343c,#ff6b35);width:26px;height:26px;font-size:9px">LD</div><div class="lib"><div style="font-weight:600;font-size:12px">Laura Durand</div><div style="font-size:10px;color:var(--muted)">Nice vs PSG · 12 jan.</div></div><span class="tag tgr">1 place</span></div>
+      <div class="li"><div class="av" style="background:linear-gradient(135deg,#10b981,#06d6a0);width:26px;height:26px;font-size:9px">MA</div><div class="lib"><div style="font-weight:600;font-size:12px">Marc Aveline</div><div style="font-size:10px;color:var(--muted)">Nice vs PSG · 12 jan.</div></div><span class="tag tgr">1 place</span></div>
+      <div class="li" style="background:#fffbeb"><div style="flex:1;font-size:11px;color:var(--orange);font-weight:500">⚽ Nice vs Marseille — 27 mars · 3 places non attribuées</div><button class="btn bp" style="font-size:10px">Attribuer</button></div>
+    </div>
+  </div>
+</div>
 
-      <div style="margin-top:28px">
-        <div class="section-header"><span class="section-title">Congés — Mars 2026</span></div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px">
-          <div style="display:grid;grid-template-columns:120px repeat(31,1fr);gap:2px;font-size:10px;color:var(--muted);align-items:center">
-            <div></div>
-            <div style="grid-column:span 31;display:grid;grid-template-columns:repeat(31,1fr);gap:2px;margin-bottom:8px">
-              ${Array.from({length:31},(_,i)=>`<div style="text-align:center">${i+1}</div>`).join('')}
-            </div>
-            ${[['Laura D.',''],['Sophie C.','18-22'],['Marc A.',''],['Léa B.','3-5'],['Romain N.','']].map(([n,off])=>`
-              <div style="color:var(--text);font-size:11px;padding-right:8px">${n}</div>
-              <div style="grid-column:span 31;display:grid;grid-template-columns:repeat(31,1fr);gap:2px">
-                ${Array.from({length:31},(_,i)=>{
-                  const d=i+1;
-                  const inOff = off==='18-22'&&d>=18&&d<=22 || off==='3-5'&&d>=3&&d<=5;
-                  const isWe = new Date(2026,2,d).getDay()%6===0;
-                  return `<div style="height:14px;border-radius:2px;background:${inOff?'var(--accent)':isWe?'var(--surface2)':'rgba(45,212,160,0.08)'}"></div>`;
-                }).join('')}
-              </div>
-            `).join('')}
+<!-- PROJETS -->
+<div id="p-projets" class="page">
+  <div class="topbar"><div class="topbar-left"><h1>Projets internes</h1></div><div class="tba"><button class="btn bp" onclick="om('m-proj')">+ Projet</button></div></div>
+  <div class="content">
+    <div class="tabs"><button class="tab active" onclick="at(this)">En cours</button><button class="tab" onclick="at(this)">Terminés</button></div>
+    <div class="card">
+      <div class="li"><div class="lic" style="background:#eff6ff">🇪🇺</div><div class="lib"><div class="lit">Cartographie France-Italie</div><div class="lis">Acteurs tech franco-italiens</div><div class="lim"><span class="tag tb">EU</span><div class="pw" style="width:110px"><div class="pl"><span>Avancement</span><span>60%</span></div><div class="pb"><div class="pf bl" style="width:60%"></div></div></div></div></div><div class="lia"><span style="font-size:10px;color:var(--muted)">30 juin</span></div></div>
+      <div class="li"><div class="lic" style="background:#fef2f2">📊</div><div class="lib"><div class="lit">Rapport Annuel 2025</div><div class="lis">KPIs, rédaction, board</div><div class="lim"><span class="tag tgr">Interne</span><div class="pw" style="width:110px"><div class="pl"><span>Avancement</span><span>40%</span></div><div class="pb"><div class="pf" style="width:40%"></div></div></div></div></div><div class="lia"><span style="font-size:10px;color:var(--muted)">15 avr.</span></div></div>
+      <div class="li"><div class="lic" style="background:#fffbeb">🏆</div><div class="lib"><div class="lit">Prix Innovation Sud 2026</div><div class="lis">Jury, logistique, comm.</div><div class="lim"><span class="tag to">Event</span><div class="pw" style="width:110px"><div class="pl"><span>Avancement</span><span>75%</span></div><div class="pb"><div class="pf or" style="width:75%"></div></div></div></div></div><div class="lia"><span style="font-size:10px;color:var(--muted)">31 mars</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- AAP -->
+<div id="p-aap" class="page">
+  <div class="topbar"><div class="topbar-left"><h1>Appels à projets</h1></div><div class="tba"><button class="btn bp" onclick="om('m-aap')">+ Appel</button></div></div>
+  <div class="content">
+    <div class="card">
+      <div class="ch"><span class="ct">Prix Innovation Sud 2026</span><span class="tag tr">Ouvert · clôt. 31 mars</span></div>
+      <div class="cb">
+        <div style="display:flex;gap:16px;margin-bottom:12px">
+          <div style="text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700">42</div><div style="font-size:10px;color:var(--muted)">Total</div></div>
+          <div style="text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:var(--orange)">28</div><div style="font-size:10px;color:var(--muted)">Reçues</div></div>
+          <div style="text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:var(--blue)">12</div><div style="font-size:10px;color:var(--muted)">En cours</div></div>
+          <div style="text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:var(--green)">2</div><div style="font-size:10px;color:var(--muted)">Retenues</div></div>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center"><button class="btn bg" style="font-size:10px">🔗 Lien public</button><span style="font-size:10px;color:var(--muted);font-style:italic">ftca.xar.app/candidature/…</span></div>
+      </div>
+      <div class="li"><div class="lic" style="background:#eff6ff;color:var(--blue);font-weight:700;font-size:11px">AM</div><div class="lib"><div class="lit">AlgoMed</div><div class="lis">Sophie Laurent · 10 mars · HealthTech</div></div><div class="lia"><select class="fi" style="width:auto;padding:3px 6px;font-size:10px"><option>Reçue</option><option>En cours</option><option>Retenue</option><option>Refusée</option></select></div></div>
+      <div class="li"><div class="lic" style="background:#ecfdf5;color:var(--green);font-weight:700;font-size:11px">GR</div><div class="lib"><div class="lit">GreenRoute</div><div class="lis">Thomas Bernard · 9 mars · CleanTech</div></div><div class="lia"><select class="fi" style="width:auto;padding:3px 6px;font-size:10px"><option>Reçue</option><option selected>En cours</option><option>Retenue</option><option>Refusée</option></select></div></div>
+      <div class="li"><div class="lic" style="background:#fef2f2;color:var(--red);font-weight:700;font-size:11px">CY</div><div class="lib"><div class="lit">CyberGuard</div><div class="lis">Amina Kadi · 8 mars · Cybersécurité</div></div><div class="lia"><select class="fi" style="width:auto;padding:3px 6px;font-size:10px"><option>Reçue</option><option>En cours</option><option selected>Retenue</option><option>Refusée</option></select></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM & CONGÉS -->
+<div id="p-team" class="page">
+  <div class="topbar"><div class="topbar-left"><h1>Équipe & Congés</h1></div><div class="tba"><button class="btn bp" onclick="om('m-conge')">+ Demande</button></div></div>
+  <div class="content">
+    <div class="g3" style="margin-bottom:14px">
+      <div class="tc"><div class="tav" style="background:linear-gradient(135deg,#e8343c,#ff6b35)">LD</div><div class="tn">Laura Durand</div><div class="tr2">Directrice</div><div class="pres"><span class="dot dg"></span><span style="color:var(--green);font-size:10px">Présente</span></div></div>
+      <div class="tc"><div class="tav" style="background:linear-gradient(135deg,#3b82f6,#6a4fff)">SC</div><div class="tn">Sophie Caron</div><div class="tr2">Événements</div><div class="pres"><span class="dot do"></span><span style="color:var(--orange);font-size:10px">Congé 18–22 mars</span></div></div>
+      <div class="tc"><div class="tav" style="background:linear-gradient(135deg,#10b981,#06d6a0)">MA</div><div class="tn">Marc Aveline</div><div class="tr2">Chargé de mission</div><div class="pres"><span class="dot dg"></span><span style="color:var(--green);font-size:10px">Présent</span></div></div>
+      <div class="tc"><div class="tav" style="background:linear-gradient(135deg,#a855f7,#6a4fff)">LB</div><div class="tn">Léa Bernard</div><div class="tr2">Community</div><div class="pres"><span class="dot db"></span><span style="color:var(--blue);font-size:10px">Mission</span></div></div>
+      <div class="tc"><div class="tav" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">RN</div><div class="tn">Romain Navarro</div><div class="tr2">Communication</div><div class="pres"><span class="dot dg"></span><span style="color:var(--green);font-size:10px">Présent</span></div></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:10px;font-size:10px;align-items:center;flex-wrap:wrap">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;flex:1">Planning Mars 2026</span>
+      <span style="display:flex;align-items:center;gap:3px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:rgba(232,52,60,.15);display:inline-block"></span>Congé</span>
+      <span style="display:flex;align-items:center;gap:3px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:rgba(59,130,246,.15);display:inline-block"></span>Mission</span>
+      <span style="display:flex;align-items:center;gap:3px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--border);display:inline-block"></span>W-E</span>
+    </div>
+    <div class="gantt" id="gantt"></div>
+    <div class="card" style="margin-top:14px"><div class="ch"><span class="ct">En attente de validation</span></div>
+      <div class="li"><div class="av" style="background:linear-gradient(135deg,#a855f7,#6a4fff);width:28px;height:28px;font-size:9px">LB</div><div class="lib"><div class="lit" style="font-size:12px">Léa Bernard</div><div style="font-size:10px;color:var(--muted)">CP · 3–5 avril · 3 jours</div></div><div class="lia"><button class="btn bg" style="font-size:10px;padding:3px 7px">Refuser</button><button class="btn bp" style="font-size:10px;padding:3px 7px">✓ Valider</button></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI -->
+<div id="p-kpi" class="page">
+  <div class="topbar"><div class="topbar-left"><h1>KPIs & Reporting</h1></div><div class="tba"><button class="btn bg">📤 Exporter</button></div></div>
+  <div class="content">
+    <div class="sg s4"><div class="sc"><div class="sl">Événements 2026</div><div class="sv">12</div><div class="ss">/ 40 objectif</div></div><div class="sc bl"><div class="sl">Start-ups</div><div class="sv">47</div></div><div class="sc gr"><div class="sl">Fondatrices</div><div class="sv">31%</div><div class="ss">KPI diversité ✓</div></div><div class="sc vi"><div class="sl">Mises en relation</div><div class="sv">128</div></div></div>
+    <div class="g2">
+      <div class="card"><div class="ch"><span class="ct">Répartition sectorielle</span></div><div class="cb">
+        <div class="kr"><span class="kl">HealthTech</span><div class="kbw"><div class="kb" style="width:31%;background:var(--blue)"></div></div><span class="kv" style="color:var(--blue)">31%</span></div>
+        <div class="kr"><span class="kl">CleanTech</span><div class="kbw"><div class="kb" style="width:24%;background:var(--green)"></div></div><span class="kv" style="color:var(--green)">24%</span></div>
+        <div class="kr"><span class="kl">Deeptech / IA</span><div class="kbw"><div class="kb" style="width:19%;background:var(--violet)"></div></div><span class="kv" style="color:var(--violet)">19%</span></div>
+        <div class="kr"><span class="kl">Cybersécurité</span><div class="kbw"><div class="kb" style="width:13%;background:var(--red)"></div></div><span class="kv" style="color:var(--red)">13%</span></div>
+        <div class="kr"><span class="kl">Fintech</span><div class="kbw"><div class="kb" style="width:8%;background:var(--orange)"></div></div><span class="kv" style="color:var(--orange)">8%</span></div>
+      </div></div>
+      <div class="card"><div class="ch"><span class="ct">Indicateur diversité</span></div><div class="cb">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:800;color:var(--green)">31%</div><div style="font-size:10px;color:var(--muted)">de fondatrices</div></div>
+          <div style="flex:1">
+            <div style="margin-bottom:6px"><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:3px"><span style="color:var(--muted)">Fondatrices (Mme)</span><span style="font-weight:600">15/47</span></div><div style="height:8px;background:var(--bg);border-radius:4px;overflow:hidden"><div style="height:100%;width:31%;background:var(--green);border-radius:4px"></div></div></div>
+            <div style="padding:7px 10px;background:#ecfdf5;border-radius:5px;font-size:10px;color:var(--green);font-weight:500">✓ KPI French Tech Mission — calculé depuis civilité CRM</div>
           </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PARAM -->
+<div id="p-param" class="page">
+  <div class="topbar"><div class="topbar-left"><h1>Paramétrage</h1></div></div>
+  <div class="content">
+    <div class="g2">
+      <div>
+        <div class="card"><div class="ch"><span class="ct">Modèles d'événements</span><button class="btn bp" style="font-size:10px;padding:4px 8px">+ Créer</button></div>
+          <div class="li"><div class="lic">📅</div><div class="lib"><div class="lit">Afterwork mensuel</div><div class="lis">Networking · 150 places · 18h–21h</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">✏️</button></div>
+          <div class="li"><div class="lic">🏆</div><div class="lib"><div class="lit">Demo Day</div><div class="lis">Concours · 200 places · journée</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">✏️</button></div>
+        </div>
+        <div class="card"><div class="ch"><span class="ct">Modèles d'emails</span><button class="btn bp" style="font-size:10px;padding:4px 8px">+ Créer</button></div>
+          <div class="li"><div class="lib"><div class="lit">Invitation événement</div><div class="lis">Objet : Vous êtes invité à [NOM]</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">✏️</button></div>
+          <div class="li"><div class="lib"><div class="lit">Accusé réception AAP</div><div class="lis">Objet : Candidature [AAP] bien reçue</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">✏️</button></div>
+        </div>
+      </div>
+      <div>
+        <div class="card"><div class="ch"><span class="ct">Tables de référence</span></div>
+          <div class="li"><div class="lib"><div class="lit">Types d'entité</div><div class="lis">10 valeurs</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Gérer</button></div>
+          <div class="li"><div class="lib"><div class="lit">Secteurs d'activité</div><div class="lis">13 valeurs</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Gérer</button></div>
+          <div class="li"><div class="lib"><div class="lit">Stades de développement</div><div class="lis">6 valeurs</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Gérer</button></div>
+          <div class="li"><div class="lib"><div class="lit">Types de partenariat</div><div class="lis">5 valeurs</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Gérer</button></div>
+          <div class="li"><div class="lib"><div class="lit">Types d'absence</div><div class="lis">6 valeurs</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Gérer</button></div>
+        </div>
+        <div class="card"><div class="ch"><span class="ct">Gestion des accès</span><button class="btn bp" style="font-size:10px;padding:4px 8px">+ Inviter</button></div>
+          <div class="li"><div class="av" style="background:linear-gradient(135deg,#e8343c,#ff6b35);width:26px;height:26px;font-size:9px">LD</div><div class="lib"><div style="font-weight:600;font-size:11px">Laura Durand</div></div><span class="tag tr">Admin</span></div>
+          <div class="li"><div class="av" style="background:linear-gradient(135deg,#3b82f6,#6a4fff);width:26px;height:26px;font-size:9px">SC</div><div class="lib"><div style="font-weight:600;font-size:11px">Sophie Caron</div></div><span class="tag tgr">Équipier</span></div>
+          <div class="li"><div class="av" style="background:linear-gradient(135deg,#10b981,#06d6a0);width:26px;height:26px;font-size:9px">MA</div><div class="lib"><div style="font-weight:600;font-size:11px">Marc Aveline</div></div><span class="tag tgr">Équipier</span></div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- KPI PAGE -->
-  <div id="page-kpi" class="page">
-    <div class="topbar">
-      <h1>KPIs & Data</h1>
-      <div class="topbar-actions">
-        <button class="btn btn-ghost">📊 Exporter rapport</button>
-      </div>
-    </div>
-    <div class="content">
-      <div class="two-col">
-        <div>
-          <div class="section-header"><span class="section-title">Activité start-ups</span></div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px">
-            <div class="kpi-bar-chart">
-              <div class="kpi-row"><span class="kpi-label">Fondatrices femmes</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:31%;background:var(--accent)"></div></div><span class="kpi-val" style="color:var(--accent)">31%</span></div>
-              <div class="kpi-row"><span class="kpi-label">HealthTech</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:24%;background:var(--blue)"></div></div><span class="kpi-val" style="color:var(--blue)">24%</span></div>
-              <div class="kpi-row"><span class="kpi-label">CleanTech</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:19%;background:var(--green)"></div></div><span class="kpi-val" style="color:var(--green)">19%</span></div>
-              <div class="kpi-row"><span class="kpi-label">Deeptech</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:15%;background:var(--accent2)"></div></div><span class="kpi-val" style="color:var(--accent2)">15%</span></div>
-              <div class="kpi-row"><span class="kpi-label">Fintech</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:12%;background:var(--muted)"></div></div><span class="kpi-val">12%</span></div>
-              <div class="kpi-row"><span class="kpi-label">Autres</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:10%;background:var(--border)"></div></div><span class="kpi-val">10%</span></div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="section-header"><span class="section-title">Événements — 2026</span></div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px">
-            <div class="kpi-bar-chart">
-              <div class="kpi-row"><span class="kpi-label">Jan</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:60%;background:var(--accent)"></div></div><span class="kpi-val">3</span></div>
-              <div class="kpi-row"><span class="kpi-label">Fév</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:80%;background:var(--accent)"></div></div><span class="kpi-val">4</span></div>
-              <div class="kpi-row"><span class="kpi-label">Mar</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:100%;background:var(--accent)"></div></div><span class="kpi-val">5</span></div>
-              <div class="kpi-row"><span class="kpi-label">Avr</span><div class="kpi-bar-wrap"><div class="kpi-bar" style="width:40%;background:rgba(232,52,60,0.4)"></div></div><span class="kpi-val" style="color:var(--muted)">2 ↗</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top:20px">
-        <div class="section-header"><span class="section-title">Candidatures aux appels à projets</span></div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px">
-          <div class="stats-row" style="grid-template-columns:repeat(4,1fr);margin:0">
-            <div><div class="stat-label">Total candidatures</div><div class="stat-value" style="font-size:28px">84</div></div>
-            <div><div class="stat-label">Dossiers complets</div><div class="stat-value" style="font-size:28px;color:var(--green)">71</div></div>
-            <div><div class="stat-label">Mises en relation</div><div class="stat-value" style="font-size:28px;color:var(--blue)">128</div></div>
-            <div><div class="stat-label">Taux de succès</div><div class="stat-value" style="font-size:28px;color:var(--accent2)">34%</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- APPELS PAGE -->
-  <div id="page-appels" class="page">
-    <div class="topbar">
-      <h1>Appels à projets</h1>
-      <div class="topbar-actions">
-        <button class="btn btn-primary">+ Créer un appel</button>
-      </div>
-    </div>
-    <div class="content">
-      <div class="event-list">
-        <div class="event-card">
-          <div class="event-date-block"><div class="event-day">31</div><div class="event-month">Mars</div></div>
-          <div class="event-info">
-            <div class="event-name">Prix Innovation Sud 2026</div>
-            <div class="event-meta"><span>📋 42 candidatures reçues</span><span>🏆 Doté 50k€</span></div>
-          </div>
-          <div class="event-progress">
-            <div class="progress-label"><span>Dossiers</span><span>42/∞</span></div>
-            <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
-          </div>
-          <div class="event-tags"><span class="tag tag-red">En cours</span></div>
-        </div>
-        <div class="event-card">
-          <div class="event-date-block"><div class="event-day">15</div><div class="event-month">Avr</div></div>
-          <div class="event-info">
-            <div class="event-name">Appel à projets Franco-Italien</div>
-            <div class="event-meta"><span>📋 12 candidatures</span><span>🌍 Projet européen</span></div>
-          </div>
-          <div class="event-progress">
-            <div class="progress-label"><span>Dossiers</span><span>12/30</span></div>
-            <div class="progress-bar"><div class="progress-fill blue" style="width:40%"></div></div>
-          </div>
-          <div class="event-tags"><span class="tag tag-blue">Ouvert</span></div>
-        </div>
-        <div class="event-card" style="opacity:0.6">
-          <div class="event-date-block"><div class="event-day">28</div><div class="event-month">Fév</div></div>
-          <div class="event-info">
-            <div class="event-name">Coup de Pouce Deeptech</div>
-            <div class="event-meta"><span>📋 30 candidatures</span><span>✅ Lauréat désigné</span></div>
-          </div>
-          <div class="event-progress">
-            <div class="progress-label"><span>Final</span><span>30/30</span></div>
-            <div class="progress-bar"><div class="progress-fill green" style="width:100%"></div></div>
-          </div>
-          <div class="event-tags"><span class="tag tag-green">Clôturé</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 
 </main>
 
-<!-- PANELS / MODALS -->
-<div class="panel-overlay" id="panel-event" onclick="closePanel(event,'panel-event')">
-  <div class="panel" onclick="event.stopPropagation()">
-    <div class="panel-close" onclick="closePanel(null,'panel-event')">✕</div>
-    <h3>Créer un événement</h3>
-    <div class="form-row"><label class="form-label">Nom de l'événement</label><input class="form-input" placeholder="Ex: Afterwork French Tech #13"></div>
-    <div class="form-row-2">
-      <div class="form-row" style="margin:0"><label class="form-label">Date</label><input class="form-input" type="date"></div>
-      <div class="form-row" style="margin:0"><label class="form-label">Heure</label><input class="form-input" type="time" value="18:00"></div>
-    </div>
-    <div class="form-row" style="margin-top:16px"><label class="form-label">Lieu</label><input class="form-input" placeholder="Adresse ou lieu"></div>
-    <div class="form-row-2" style="margin-top:0">
-      <div class="form-row" style="margin:0"><label class="form-label">Capacité max</label><input class="form-input" type="number" placeholder="150"></div>
-      <div class="form-row" style="margin:0"><label class="form-label">Type</label><select class="form-input"><option>Networking</option><option>Concours</option><option>Projet EU</option><option>Sport</option><option>Start-ups</option></select></div>
-    </div>
-    <div class="form-row" style="margin-top:16px"><label class="form-label">Description</label><textarea class="form-input" rows="3" placeholder="Détails de l'événement..."></textarea></div>
-    <div class="panel-footer">
-      <button class="btn btn-ghost" onclick="closePanel(null,'panel-event')">Annuler</button>
-      <button class="btn btn-primary" onclick="closePanel(null,'panel-event')">Créer l'événement</button>
-    </div>
-  </div>
-</div>
+<!-- MODALS -->
+<div class="mo" id="m-evt" onclick="cm(event,'m-evt')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouvel événement</h3><div class="fr"><label class="fl">Nom</label><input class="fi" placeholder="Ex : Afterwork FT #13"></div><div class="fr2"><div><label class="fl">Date</label><input class="fi" type="date"></div><div><label class="fl">Capacité</label><input class="fi" type="number" placeholder="150"></div></div><div class="fr"><label class="fl">Lieu</label><input class="fi" placeholder="Lieu ou adresse"></div><div class="fr"><label class="fl">Type</label><select class="fi"><option>Networking</option><option>Concours</option><option>Mission</option><option>Start-ups</option></select></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-evt')">Annuler</button><button class="btn bp" onclick="cm(null,'m-evt')">Enregistrer</button></div></div></div>
 
-<div class="panel-overlay" id="panel-event-detail" onclick="closePanel(event,'panel-event-detail')">
-  <div class="panel" onclick="event.stopPropagation()">
-    <div class="panel-close" onclick="closePanel(null,'panel-event-detail')">✕</div>
-    <h3>Afterwork French Tech #12</h3>
-    <div style="display:flex;gap:8px;margin-bottom:20px">
-      <span class="tag tag-red">Networking</span>
-      <span class="tag tag-green">Ouvert aux inscriptions</span>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
-      <div style="background:var(--surface2);border-radius:8px;padding:12px"><div class="stat-label">Date</div><div style="font-weight:600">14 Mars 2026 — 18h00</div></div>
-      <div style="background:var(--surface2);border-radius:8px;padding:12px"><div class="stat-label">Lieu</div><div style="font-weight:600">Le Booster, Nice</div></div>
-      <div style="background:var(--surface2);border-radius:8px;padding:12px"><div class="stat-label">Inscrits</div><div style="font-weight:600;color:var(--accent)">120 / 150</div></div>
-      <div style="background:var(--surface2);border-radius:8px;padding:12px"><div class="stat-label">Responsable</div><div style="font-weight:600">Sophie Caron</div></div>
-    </div>
-    <div class="section-title" style="margin-bottom:10px">Partenaires associés</div>
-    <div style="display:flex;gap:8px;margin-bottom:20px">
-      <span class="tag tag-blue">CCI Nice</span>
-      <span class="tag tag-orange">BPI France</span>
-      <span class="tag tag-green">Métropole NCA</span>
-    </div>
-    <div class="panel-footer">
-      <button class="btn btn-ghost" onclick="closePanel(null,'panel-event-detail')">Fermer</button>
-      <button class="btn btn-ghost">✏️ Modifier</button>
-      <button class="btn btn-primary">📧 Envoyer invitations</button>
-    </div>
-  </div>
-</div>
+<div class="mo" id="m-evtd" onclick="cm(event,'m-evtd')"><div class="modal" onclick="event.stopPropagation()"><h3>Afterwork French Tech #12</h3><div style="display:flex;gap:5px;margin-bottom:14px"><span class="tag tr">Networking</span><span class="tag tg">Ouvert</span></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px"><div style="background:var(--bg);border-radius:5px;padding:9px"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;margin-bottom:2px">Date</div><div style="font-weight:600;font-size:12px">14 mars · 18h00</div></div><div style="background:var(--bg);border-radius:5px;padding:9px"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;margin-bottom:2px">Lieu</div><div style="font-weight:600;font-size:12px">Le Booster, Nice</div></div><div style="background:var(--bg);border-radius:5px;padding:9px"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;margin-bottom:2px">Participants</div><div style="font-weight:600;font-size:12px;color:var(--red)">120 / 150</div></div><div style="background:var(--bg);border-radius:5px;padding:9px"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;margin-bottom:2px">Responsable</div><div style="font-weight:600;font-size:12px">Sophie Caron</div></div></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-evtd')">Fermer</button><button class="btn bp">👥 Participants</button></div></div></div>
 
-<div class="panel-overlay" id="panel-contact" onclick="closePanel(event,'panel-contact')">
-  <div class="panel" onclick="event.stopPropagation()">
-    <div class="panel-close" onclick="closePanel(null,'panel-contact')">✕</div>
-    <h3>Ajouter un contact</h3>
-    <div class="form-row-2">
-      <div class="form-row" style="margin:0"><label class="form-label">Prénom</label><input class="form-input" placeholder="Prénom"></div>
-      <div class="form-row" style="margin:0"><label class="form-label">Nom</label><input class="form-input" placeholder="Nom"></div>
-    </div>
-    <div class="form-row" style="margin-top:16px"><label class="form-label">Organisation</label><input class="form-input" placeholder="Nom de la structure"></div>
-    <div class="form-row"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="email@exemple.fr"></div>
-    <div class="form-row-2">
-      <div class="form-row" style="margin:0"><label class="form-label">Type</label><select class="form-input"><option>Partenaire</option><option>Institutionnel</option><option>Start-up</option><option>Média</option></select></div>
-      <div class="form-row" style="margin:0"><label class="form-label">Statut</label><select class="form-input"><option>Actif</option><option>En discussion</option><option>Inactif</option></select></div>
-    </div>
-    <div class="panel-footer">
-      <button class="btn btn-ghost" onclick="closePanel(null,'panel-contact')">Annuler</button>
-      <button class="btn btn-primary" onclick="closePanel(null,'panel-contact')">Ajouter</button>
-    </div>
-  </div>
-</div>
+<div class="mo" id="m-entite" onclick="cm(event,'m-entite')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouvelle entité</h3><div class="fr"><label class="fl">Nom</label><input class="fi" placeholder="Nom de l'organisation"></div><div class="fr2"><div><label class="fl">Type</label><select class="fi"><option>Start-up</option><option>PME / ETI</option><option>Institution publique</option><option>Collectivité</option><option>Investisseur</option><option>Offreur de services</option></select></div><div><label class="fl">Statut</label><select class="fi"><option>Actif</option><option>En discussion</option><option>Inactif</option></select></div></div><div class="fr2"><div><label class="fl">Secteur</label><select class="fi"><option>HealthTech</option><option>CleanTech</option><option>Deeptech / IA</option><option>Cybersécurité</option><option>Fintech</option><option>Autre</option></select></div><div><label class="fl">Stade</label><select class="fi"><option>—</option><option>Idéation</option><option>Pre-seed</option><option>Seed</option><option>Série A</option><option>Série B+</option><option>Mature</option></select></div></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-entite')">Annuler</button><button class="btn bp" onclick="cm(null,'m-entite')">Enregistrer</button></div></div></div>
 
-<div class="panel-overlay" id="panel-contact-detail" onclick="closePanel(event,'panel-contact-detail')">
-  <div class="panel" onclick="event.stopPropagation()">
-    <div class="panel-close" onclick="closePanel(null,'panel-contact-detail')">✕</div>
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
-      <div class="contact-avatar" style="width:52px;height:52px;font-size:18px;background:rgba(232,52,60,0.15);color:var(--accent)">CG</div>
-      <div><h3 style="margin:0">CCI Nice Côte d'Azur</h3><div style="color:var(--muted);font-size:13px">Marie Dupont — m.dupont@cci-nice.fr</div></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
-      <div style="background:var(--surface2);border-radius:8px;padding:12px"><div class="stat-label">Type</div><div style="font-weight:600">Institutionnel</div></div>
-      <div style="background:var(--surface2);border-radius:8px;padding:12px"><div class="stat-label">Statut</div><div style="font-weight:600;color:var(--green)">✓ Actif</div></div>
-      <div style="background:var(--surface2);border-radius:8px;padding:12px"><div class="stat-label">Événements communs</div><div style="font-weight:600">12</div></div>
-      <div style="background:var(--surface2);border-radius:8px;padding:12px"><div class="stat-label">Depuis</div><div style="font-weight:600">Jan 2023</div></div>
-    </div>
-    <div class="section-title" style="margin-bottom:10px">Derniers événements</div>
-    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">
-      <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px;background:var(--surface2);border-radius:6px"><span>Afterwork French Tech #11</span><span style="color:var(--muted)">14 Fév 2026</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px;background:var(--surface2);border-radius:6px"><span>Demo Day Automne 2025</span><span style="color:var(--muted)">22 Oct 2025</span></div>
-    </div>
-    <div class="panel-footer">
-      <button class="btn btn-ghost" onclick="closePanel(null,'panel-contact-detail')">Fermer</button>
-      <button class="btn btn-ghost">✏️ Modifier</button>
-      <button class="btn btn-primary">📧 Contacter</button>
-    </div>
-  </div>
-</div>
+<div class="mo" id="m-contact" onclick="cm(event,'m-contact')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouveau contact</h3><div class="fr2"><div><label class="fl">Civilité</label><select class="fi"><option>M.</option><option>Mme</option><option>Autre</option></select></div><div><label class="fl">Prénom</label><input class="fi" placeholder="Prénom"></div></div><div class="fr2"><div><label class="fl">Nom</label><input class="fi" placeholder="Nom"></div><div><label class="fl">Rôle</label><input class="fi" placeholder="CEO, Chargé de…"></div></div><div class="fr"><label class="fl">Email</label><input class="fi" type="email" placeholder="email@exemple.fr"></div><div class="fr"><label class="fl">Entité de rattachement</label><select class="fi"><option>— Sélectionner —</option><option>AlgoMed</option><option>GreenRoute</option><option>CCI Nice</option><option>BPI France</option></select></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-contact')">Annuler</button><button class="btn bp" onclick="cm(null,'m-contact')">Enregistrer</button></div></div></div>
+
+<div class="mo" id="m-conge" onclick="cm(event,'m-conge')"><div class="modal" onclick="event.stopPropagation()"><h3>Demande de congé</h3><div class="fr"><label class="fl">Membre</label><select class="fi"><option>Laura Durand</option><option>Sophie Caron</option><option>Marc Aveline</option><option>Léa Bernard</option><option>Romain Navarro</option></select></div><div class="fr2"><div><label class="fl">Du</label><input class="fi" type="date"></div><div><label class="fl">Au</label><input class="fi" type="date"></div></div><div class="fr"><label class="fl">Type</label><select class="fi"><option>Congés payés</option><option>RTT</option><option>Maladie</option><option>Mission extérieure</option><option>Congé exceptionnel</option></select></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-conge')">Annuler</button><button class="btn bp" onclick="cm(null,'m-conge')">Enregistrer</button></div></div></div>
+
+<div class="mo" id="m-proj" onclick="cm(event,'m-proj')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouveau projet</h3><div class="fr"><label class="fl">Nom</label><input class="fi" placeholder="Ex : Mission France-Italie"></div><div class="fr2"><div><label class="fl">Responsable</label><select class="fi"><option>Laura Durand</option><option>Sophie Caron</option><option>Marc Aveline</option></select></div><div><label class="fl">Échéance</label><input class="fi" type="date"></div></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-proj')">Annuler</button><button class="btn bp" onclick="cm(null,'m-proj')">Enregistrer</button></div></div></div>
+
+<div class="mo" id="m-aap" onclick="cm(event,'m-aap')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouvel appel à projets</h3><div class="fr"><label class="fl">Titre</label><input class="fi" placeholder="Ex : Prix Innovation Sud 2027"></div><div class="fr2"><div><label class="fl">Ouverture</label><input class="fi" type="date"></div><div><label class="fl">Clôture</label><input class="fi" type="date"></div></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-aap')">Annuler</button><button class="btn bp" onclick="cm(null,'m-aap')">Enregistrer & lien</button></div></div></div>
+
+<div class="mo" id="m-part" onclick="cm(event,'m-part')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouveau partenariat</h3><div class="fr"><label class="fl">Entité</label><select class="fi"><option>OGC Nice</option><option>CCI Nice</option><option>BPI France</option></select></div><div class="fr2"><div><label class="fl">Type</label><select class="fi"><option>Offreur de services & tarifs négociés</option><option>Financeur</option><option>Co-organisateur</option><option>Mécénat</option><option>Partenaire institutionnel</option></select></div><div><label class="fl">Quota</label><input class="fi" type="number" placeholder="Ex : 10"></div></div><div class="fr2"><div><label class="fl">Début</label><input class="fi" type="date"></div><div><label class="fl">Fin</label><input class="fi" type="date"></div></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-part')">Annuler</button><button class="btn bp" onclick="cm(null,'m-part')">Enregistrer</button></div></div></div>
 
 <script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  event.currentTarget && event.currentTarget.classList.add('active');
-  // find matching nav
-  document.querySelectorAll('.nav-item').forEach(n => {
-    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) {
-      n.classList.add('active');
-    }
+function go(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg=document.getElementById('p-'+id);
+  if(pg)pg.classList.add('active');
+  document.querySelectorAll('.ni,.nsi').forEach(n=>n.classList.remove('active'));
+  if(el){el.classList.add('active');}
+}
+function at(el){el.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+function om(id){document.getElementById(id).classList.add('open');}
+function cm(e,id){if(!e||e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
+
+// GANTT
+(function(){
+  const members=[{n:'Laura Durand',off:[],mis:[]},{n:'Sophie Caron',off:[18,19,20,21,22],mis:[]},{n:'Marc Aveline',off:[],mis:[]},{n:'Léa Bernard',off:[],mis:[3,4,5]},{n:'Romain Navarro',off:[],mis:[]}];
+  const we=[1,2,7,8,9,14,15,16,21,22,23,28,29,30];
+  const days=Array.from({length:31},(_,i)=>i+1);
+  const lw=120,cw=18;
+  const ct=`${lw}px ${days.map(()=>cw+'px').join(' ')}`;
+  const wrap=document.getElementById('gantt');
+  const hdr=document.createElement('div');
+  hdr.className='gr-row';hdr.style.gridTemplateColumns=ct;
+  hdr.innerHTML=`<div class="gl hdr">Membre</div>`+days.map(d=>`<div class="gc hdr${d===10?' today':''}">${d}</div>`).join('');
+  wrap.appendChild(hdr);
+  members.forEach(m=>{
+    const row=document.createElement('div');
+    row.className='gr-row';row.style.gridTemplateColumns=ct;
+    row.innerHTML=`<div class="gl">${m.n}</div>`+days.map(d=>{
+      let cls='gc';
+      if(we.includes(d))cls+=' we';
+      else if(m.off.includes(d))cls+=' off';
+      else if(m.mis.includes(d))cls+=' mis';
+      if(d===10)cls+=' today';
+      return`<div class="${cls}"></div>`;
+    }).join('');
+    wrap.appendChild(row);
   });
-}
-function openPanel(id) {
-  document.getElementById(id).classList.add('open');
-}
-function closePanel(e, id) {
-  if (!e || e.target === document.getElementById(id)) {
-    document.getElementById(id).classList.remove('open');
+})();
+
+// MONTH CALENDAR
+(function(){
+  const evts={14:[{l:'Afterwork FT',c:'red'}],21:[{l:'Demo Day',c:'blue'}],27:[{l:'OGC Nice',c:'green'}],3:[{l:'Mission IT',c:'orange'}],15:[{l:'Pitch & Bière',c:'blue'}]};
+  const firstDay=6,dim=31;
+  const we=[6,7,13,14,20,21,27,28];
+  const grid=document.getElementById('mcal-grid');
+  for(let i=0;i<firstDay;i++){const d=document.createElement('div');d.className='md om';grid.appendChild(d);}
+  for(let d=1;d<=dim;d++){
+    const cell=document.createElement('div');
+    cell.className='md'+(d===10?' today':'');
+    const dn=document.createElement('div');
+    dn.className='dn'+(we.includes(d)?' we':'');
+    dn.textContent=d;cell.appendChild(dn);
+    if(evts[d])evts[d].forEach(ev=>{const e=document.createElement('div');e.className=`me ${ev.c}`;e.textContent=ev.l;cell.appendChild(e);});
+    grid.appendChild(cell);
   }
-}
-// Tab interactions
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', function() {
-    this.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
+  const total=firstDay+dim;const rem=total%7===0?0:7-(total%7);
+  for(let i=0;i<rem;i++){const d=document.createElement('div');d.className='md om';grid.appendChild(d);}
+})();
 </script>
 </body>
 </html>
