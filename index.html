@@ -7,11 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --red:#e8343c;--violet:#3d2b7a;--bg:#ffffff;--white:#ffffff;
+  --red:#e8343c;--violet:#3d2b7a;--bg:#fff;--white:#fff;
   --border:#e3e6ec;--text:#1a1d2e;--muted:#6b7280;--light:#9ca3af;
   --green:#059669;--orange:#d97706;--blue:#2563eb;
   --av-bg:#ede9f8;--av-color:#3d2b7a;--surface:#f8f9fb;
-  --cmax:860px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);display:flex;height:100vh;overflow:hidden;font-size:13px;}
@@ -49,11 +48,11 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .btn{display:inline-flex;align-items:center;gap:4px;padding:6px 13px;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;border:none;font-family:'Barlow',sans-serif;transition:all .12s;}
 .bp{background:var(--red);color:#fff;}.bp:hover{background:#c0272e;}
 .bg{background:var(--white);color:var(--text);border:1px solid var(--border);}.bg:hover{background:var(--surface);}
+.bv{background:var(--violet);color:#fff;}
 .bdark{background:#1a1d2e;color:#fff;border-radius:20px;padding:7px 16px;font-size:11px;}
 
-/* CONTENT — largeur homogène */
-.content{flex:1;overflow-y:auto;padding:22px 28px;}
-.wrap{max-width:var(--cmax);width:100%;}
+/* CONTENT — largeur homogène via max-width sur content */
+.content{flex:1;overflow-y:auto;padding:22px 28px;max-width:calc(860px + 56px);}
 
 .page{display:none;}.page.active{display:block;animation:fi .15s ease;}
 @keyframes fi{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
@@ -69,12 +68,10 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .sv{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;line-height:1;}
 .ss{font-size:10px;color:var(--light);margin-top:2px;}
 
-/* CARD */
 .card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:14px;}
 .ch{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .ct{font-size:13px;font-weight:600;}.cb{padding:15px 16px;}
 
-/* LIST */
 .lf{padding:9px 14px;border-bottom:1px solid var(--border);display:flex;gap:6px;}
 .sw{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:5px 10px;flex:1;max-width:260px;}
 .sw input{border:none;background:none;outline:none;font-size:11px;color:var(--text);font-family:'Barlow',sans-serif;width:100%;}
@@ -87,24 +84,19 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .lim{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .lia{display:flex;gap:5px;align-items:center;flex-shrink:0;}
 
-/* TAGS */
 .tag{display:inline-flex;align-items:center;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;}
 .tr{background:#fef2f2;color:var(--red);}.tv{background:#ede9f8;color:var(--violet);}
 .tg{background:#ecfdf5;color:var(--green);}.to{background:#fffbeb;color:var(--orange);}
 .tb{background:#eff6ff;color:var(--blue);}.tgr{background:var(--surface);color:var(--muted);border:1px solid var(--border);}
 
-/* GRID */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-
-/* DETAIL */
 .dg2{display:grid;grid-template-columns:1fr 280px;gap:14px;}
 .dr{display:flex;align-items:flex-start;gap:6px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
 .dr:last-child{border-bottom:none;}
 .dk{color:var(--muted);min-width:110px;flex-shrink:0;font-size:11px;}
 .dv{color:var(--text);font-weight:500;}
 
-/* TABLE */
 .tbl{width:100%;border-collapse:collapse;font-size:12px;}
 .tbl th{padding:8px 12px;text-align:left;font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);background:var(--surface);}
 .tbl td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
@@ -116,11 +108,9 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .icon-btn.accept:hover{background:#ecfdf5;border-color:var(--green);}
 .icon-btn.reject:hover{background:#fef2f2;border-color:var(--red);}
 
-/* KPI SECTIONS */
 .kpi-section{margin-bottom:20px;}
 .kpi-section-title{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border);}
 
-/* PIE CHART */
 .pie-wrap{display:flex;align-items:center;gap:24px;}
 .pie-legend{display:flex;flex-direction:column;gap:7px;flex:1;}
 .pie-legend-item{display:flex;align-items:center;gap:8px;font-size:11px;}
@@ -128,7 +118,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .pie-legend-label{flex:1;color:var(--muted);}
 .pie-legend-val{font-weight:600;color:var(--text);}
 
-/* CALENDAR */
 .mcal{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
 .mgrid{display:grid;grid-template-columns:repeat(7,1fr);}
 .mdl{text-align:center;font-size:9px;color:var(--muted);padding:7px 2px;font-weight:600;border-bottom:1px solid var(--border);}
@@ -142,12 +131,10 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .me.green{background:#ecfdf5;color:var(--green);}.me.orange{background:#fffbeb;color:var(--orange);}
 .me.violet{background:#ede9f8;color:var(--violet);}
 
-/* TABS */
 .tabs{display:flex;margin-bottom:14px;border-bottom:1px solid var(--border);}
 .tab{padding:8px 14px;font-size:11px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--muted);font-family:'Barlow',sans-serif;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s;}
 .tab:hover{color:var(--text);}.tab.active{color:var(--red);border-bottom-color:var(--red);font-weight:600;}
 
-/* COUNTER TABS */
 .ctabs{display:grid;margin-bottom:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
 .ctab{padding:14px 16px;text-align:center;cursor:pointer;background:var(--surface);border-right:1px solid var(--border);transition:all .15s;}
 .ctab:last-child{border-right:none;}
@@ -156,7 +143,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .ctab.active .ctab-num{color:var(--violet);}
 .ctab-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:2px;}
 
-/* AAP / PROJ CARDS */
 .aap-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:12px;cursor:pointer;transition:all .15s;}
 .aap-card:hover{border-color:var(--violet);}
 .aap-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;}
@@ -166,10 +152,17 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .proj-meta-item{font-size:11px;color:var(--muted);}
 .proj-meta-item strong{color:var(--text);}
 
-/* MODAL */
+/* MR demande card */
+.mr-demande{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);}
+.mr-demande:last-child{border-bottom:none;}
+.mr-demande-body{flex:1;}
+.mr-demande-title{font-size:12px;font-weight:600;margin-bottom:2px;}
+.mr-demande-msg{font-size:11px;color:var(--muted);line-height:1.4;margin-bottom:8px;}
+.mr-demande-actions{display:flex;gap:6px;}
+
 .mo{display:none;position:fixed;inset:0;z-index:400;background:rgba(15,15,30,.4);align-items:center;justify-content:center;}
 .mo.open{display:flex;}
-.modal{background:var(--white);border-radius:10px;padding:26px;width:520px;max-width:94vw;box-shadow:0 20px 60px rgba(0,0,0,.12);animation:mi .15s ease;max-height:90vh;overflow-y:auto;}
+.modal{background:var(--white);border-radius:10px;padding:26px;width:480px;max-width:94vw;box-shadow:0 20px 60px rgba(0,0,0,.12);animation:mi .15s ease;max-height:90vh;overflow-y:auto;}
 @keyframes mi{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
 .modal h3{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;text-transform:uppercase;margin-bottom:18px;}
 .fr{margin-bottom:12px;}.fr2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
@@ -179,7 +172,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .fi[readonly]{opacity:.65;cursor:default;}
 .fta{resize:vertical;min-height:70px;}
 .mf{display:flex;justify-content:flex-end;gap:6px;margin-top:4px;padding-top:14px;border-top:1px solid var(--border);}
-
 .upload-zone{border:2px dashed var(--border);border-radius:7px;padding:20px;text-align:center;cursor:pointer;transition:all .15s;margin-bottom:12px;}
 .upload-zone:hover{border-color:var(--violet);background:#f9f8fc;}
 
@@ -187,15 +179,11 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .dg{background:var(--green);}.do{background:var(--orange);}.db{background:var(--blue);}
 .pres{display:inline-flex;align-items:center;gap:3px;font-size:10px;}
 
-/* STANDALONE */
 .standalone{min-height:100vh;background:var(--surface);display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;}
 .standalone-inner{width:100%;max-width:600px;}
-.standalone-header{text-align:center;margin-bottom:28px;}
 .standalone-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:26px;}
-
-/* MEMBRE HOME */
 .home-section{margin-bottom:24px;}
-.home-section h2{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:12px;color:var(--text);}
+.home-section h2{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:12px;}
 
 ::-webkit-scrollbar{width:3px;height:3px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 </style>
@@ -231,87 +219,140 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 
 <main class="main">
 
-<!-- ══ DASHBOARD ADMIN/INTERNE ══ -->
+<!-- ══ DASHBOARD ADMIN ══ -->
 <div id="p-dash" class="page">
   <div class="topbar"><h1>Tableau de bord</h1></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="g2">
       <div>
         <div class="card">
           <div class="ch"><span class="ct">Prochains événements</span><button class="btn bg" onclick="goPage('events')" style="font-size:10px;padding:4px 8px">Voir tout →</button></div>
-          <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Matinée IA des Entrepreneurs</div><div class="lis">26 mars · aivancity Nice · 8h30–12h</div><div class="lim"><span class="tag tv">IA</span><span style="font-size:10px;color:var(--muted)">35/80 places</span></div></div></div>
-          <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Clap Festival — CCI Nice</div><div class="lis">2 avril · CCI Nice</div><div class="lim"><span class="tag tg">Festival</span><span style="font-size:10px;color:var(--muted)">58/100 places</span></div></div></div>
-          <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Cyber Founder Tour Sophia</div><div class="lis">9 avril · Sophia Antipolis</div><div class="lim"><span class="tag tr">Cybersécurité</span><span style="font-size:10px;color:var(--muted)">12/40 places</span></div></div></div>
+          <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Matinée IA des Entrepreneurs</div><div class="lis">26 mars · aivancity Nice · 8h30</div><div class="lim"><span class="tag tv">IA</span><span style="font-size:10px;color:var(--muted)">35/80 places</span></div></div></div>
+          <div class="li"><div class="lib"><div class="lit">Clap Festival — CCI Nice</div><div class="lis">2 avril · CCI Nice</div><div class="lim"><span class="tag tg">Festival</span><span style="font-size:10px;color:var(--muted)">58/100 places</span></div></div></div>
+          <div class="li"><div class="lib"><div class="lit">Cyber Founder Tour</div><div class="lis">9 avril · Sophia Antipolis</div><div class="lim"><span class="tag tr">Cybersécurité</span><span style="font-size:10px;color:var(--muted)">12/40 places</span></div></div></div>
         </div>
         <div class="card">
           <div class="ch"><span class="ct">Candidatures récentes</span><button class="btn bg" onclick="goPage('aap')" style="font-size:10px;padding:4px 8px">Voir tout →</button></div>
           <div class="li"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div><div class="lib"><div class="lit">AI Verse</div><div class="lis">RENEW-BOOSTER · il y a 2h</div></div><span class="tag to">Reçue</span></div>
-          <div class="li"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div><div class="lib"><div class="lit">Exactcure</div><div class="lis">Programme LIFT-1ère · hier</div></div><span class="tag tb">En cours</span></div>
+          <div class="li"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div><div class="lib"><div class="lit">Exactcure</div><div class="lis">LIFT-1ère · hier</div></div><span class="tag tb">En cours</span></div>
         </div>
       </div>
       <div>
         <div class="card" id="card-conges-attente">
           <div class="ch"><span class="ct">Congés en attente</span><button class="btn bg" onclick="goPage('team')" style="font-size:10px;padding:4px 8px">Voir tout →</button></div>
-          <div class="li"><div class="av">LB</div><div class="lib"><div class="lit" style="font-size:12px">Léa Bernard</div><div style="font-size:10px;color:var(--muted)">CP — 3 jours — 03/04/2026 – 05/04/2026</div></div></div>
+          <div class="li"><div class="av">LB</div><div class="lib"><div class="lit" style="font-size:12px">Léa Bernard</div><div style="font-size:10px;color:var(--muted)">CP — 3 jours — 03/04 – 05/04/2026</div></div></div>
         </div>
       </div>
     </div>
-  </div></div>
+  </div>
+</div>
+
+<!-- ══ DASHBOARD ÉQUIPIER ══ -->
+<div id="p-dash-interne" class="page">
+  <div class="topbar"><h1>Bonjour Marc 👋</h1></div>
+  <div class="content">
+    <div class="g2">
+      <div>
+        <div class="card">
+          <div class="ch"><span class="ct">Prochains événements</span><button class="btn bg" onclick="goPage('events')" style="font-size:10px;padding:4px 8px">Voir tout →</button></div>
+          <div class="li"><div class="lib"><div class="lit">Matinée IA des Entrepreneurs</div><div class="lis">26 mars · aivancity Nice · 8h30</div><div class="lim"><span class="tag tv">IA</span></div></div></div>
+          <div class="li"><div class="lib"><div class="lit">Cyber Founder Tour</div><div class="lis">9 avril · Sophia Antipolis</div><div class="lim"><span class="tag tr">Cybersécurité</span></div></div></div>
+        </div>
+        <div class="card">
+          <div class="ch"><span class="ct">Candidatures récentes</span><button class="btn bg" onclick="goPage('aap')" style="font-size:10px;padding:4px 8px">Voir tout →</button></div>
+          <div class="li"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div><div class="lib"><div class="lit">AI Verse</div><div class="lis">RENEW-BOOSTER · il y a 2h</div></div><span class="tag to">Reçue</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="ch"><span class="ct">Mes tâches</span><button class="btn bg" onclick="goPage('projets')" style="font-size:10px;padding:4px 8px">Voir tout →</button></div>
+          <div class="li" onclick="om('m-tache-detail')">
+            <div class="lib">
+              <div class="lit" style="font-size:12px">Rédaction rapport intermédiaire</div>
+              <div class="lis">Cartographie France-Italie</div>
+              <div class="lim"><span class="tag to">En cours</span><span style="font-size:10px;color:var(--muted)">Éch. 30 avril</span></div>
+            </div>
+          </div>
+          <div class="li" onclick="om('m-tache-detail')">
+            <div class="lib">
+              <div class="lit" style="font-size:12px">Mise en page rapport annuel</div>
+              <div class="lis">Rapport Annuel 2025</div>
+              <div class="lim"><span class="tag tgr">À faire</span><span style="font-size:10px;color:var(--orange)">Éch. 10 avril</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ══ DASHBOARD MEMBRE ══ -->
 <div id="p-dash-membre" class="page">
   <div class="topbar"><h1>Bonjour Claire 👋</h1></div>
-  <div class="content"><div class="wrap">
-    <div class="home-section">
-      <h2>Prochains événements</h2>
-      <div class="aap-card" onclick="goPage('fiche-event')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px"><div class="aap-title">Matinée IA des Entrepreneurs</div><span class="tag tv">IA</span></div>
-        <div class="aap-desc">26 mars · aivancity Nice · 8h30–12h — Une matinée dédiée aux entrepreneurs qui veulent intégrer l'IA dans leur activité.</div>
-        <div class="aap-footer"><span style="font-size:10px;color:var(--muted)">35/80 places</span><button class="btn bp" style="font-size:10px" onclick="event.stopPropagation();om('m-inscrire')">S'inscrire</button></div>
+  <div class="content">
+    <div class="g2">
+      <div>
+        <div class="home-section">
+          <h2>Prochains événements</h2>
+          <div class="aap-card" onclick="goPage('fiche-event')">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px"><div class="aap-title">Matinée IA des Entrepreneurs</div><span class="tag tv">IA</span></div>
+            <div class="aap-desc">26 mars · aivancity Nice · 8h30–12h</div>
+            <div class="aap-footer"><span style="font-size:10px;color:var(--muted)">35/80 places</span><button class="btn bp" style="font-size:10px" onclick="event.stopPropagation();om('m-inscrire')">S'inscrire</button></div>
+          </div>
+          <div class="aap-card" onclick="goPage('fiche-event')">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px"><div class="aap-title">Cyber Founder Tour</div><span class="tag tr">Cybersécurité</span></div>
+            <div class="aap-desc">9 avril · Sophia Antipolis · 9h–17h30</div>
+            <div class="aap-footer"><span style="font-size:10px;color:var(--muted)">12/40 places</span><button class="btn bp" style="font-size:10px" onclick="event.stopPropagation();om('m-inscrire')">S'inscrire</button></div>
+          </div>
+        </div>
+        <div class="home-section">
+          <h2>Appels à projets en cours</h2>
+          <div class="aap-card" onclick="goPage('aap-fiche')">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px"><div class="aap-title">RENEW-BOOSTER</div><span class="tag tr">Clôt. 28 avril</span></div>
+            <div class="aap-desc">Programme transition énergétique · jusqu'à 50 000€ · 6 mois mentorat</div>
+            <div class="aap-footer"><div class="lim"><span class="tag tg">CleanTech</span></div><button class="btn bp" style="font-size:10px" onclick="event.stopPropagation();om('m-candid')">Candidater</button></div>
+          </div>
+        </div>
       </div>
-      <div class="aap-card" onclick="goPage('fiche-event')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px"><div class="aap-title">Cyber Founder Tour Sophia Antipolis</div><span class="tag tr">Cybersécurité</span></div>
-        <div class="aap-desc">9 avril · Sophia Antipolis · 9h–17h30 — Programme dédié aux fondateurs de start-ups cyber.</div>
-        <div class="aap-footer"><span style="font-size:10px;color:var(--muted)">12/40 places</span><button class="btn bp" style="font-size:10px" onclick="event.stopPropagation();om('m-inscrire')">S'inscrire</button></div>
+      <div>
+        <div class="card">
+          <div class="ch"><span class="ct">Demandes de mise en relation</span><button class="btn bg" onclick="goPage('mr')" style="font-size:10px;padding:4px 8px">Voir tout →</button></div>
+          <div class="mr-demande">
+            <div class="av" style="width:32px;height:32px;font-size:10px">MA</div>
+            <div class="mr-demande-body">
+              <div class="mr-demande-title">Marc Aveline souhaite vous mettre en relation avec Nicolas Brun (Exactcure)</div>
+              <div class="mr-demande-msg">« Bonjour Claire, je pense que vous auriez des synergies intéressantes avec Nicolas sur les sujets IA médicale. »</div>
+              <div class="mr-demande-actions">
+                <button class="btn bp" style="font-size:10px;padding:4px 10px" onclick="om('m-mr-accept')">Accepter</button>
+                <button class="btn bg" style="font-size:10px;padding:4px 10px" onclick="om('m-mr-refus')">Décliner</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="home-section">
-      <h2>Appels à projets en cours</h2>
-      <div class="aap-card" onclick="goPage('aap-fiche')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px"><div class="aap-title">RENEW-BOOSTER</div><span class="tag tr">Clôt. 28 avril</span></div>
-        <div class="aap-desc">Programme d'accompagnement à la transition énergétique. Soutien jusqu'à 50 000€ et 6 mois de mentorat.</div>
-        <div class="aap-footer"><div class="lim"><span class="tag tg">CleanTech</span></div><button class="btn bp" style="font-size:10px" onclick="event.stopPropagation();om('m-candid')">Candidater</button></div>
-      </div>
-      <div class="aap-card" onclick="goPage('aap-fiche')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px"><div class="aap-title">Programme LIFT-1ère</div><span class="tag tr">Clôt. 23 avril</span></div>
-        <div class="aap-desc">Accélération dédiée aux femmes entrepreneures de la tech. 6 mois + réseau Les Premières.</div>
-        <div class="aap-footer"><div class="lim"><span class="tag tv">Diversité</span></div><button class="btn bp" style="font-size:10px" onclick="event.stopPropagation();om('m-candid')">Candidater</button></div>
-      </div>
-    </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ ENTITÉS ══ -->
 <div id="p-entites" class="page">
   <div class="topbar"><h1>CRM — Entités</h1><div class="tba" id="entites-actions"><button class="btn bg" id="btn-export-entites">📤 Exporter</button><button class="btn bp" onclick="om('m-entite')" id="btn-add-entite">+ Entité</button></div></div>
-  <div class="content"><div class="wrap">
-    <div class="tabs"><button class="tab active" onclick="at(this)">Toutes</button><button class="tab" onclick="at(this)">Start-ups</button><button class="tab" onclick="at(this)">Partenaires</button><button class="tab" onclick="at(this)">Institutions</button></div>
+  <div class="content">
     <div class="card">
-      <div class="lf"><div class="sw"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Rechercher…"></div></div>
+      <div class="lf"><div class="sw"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Rechercher…"></div><select style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:5px 10px;font-size:11px;color:var(--muted);font-family:'Barlow',sans-serif;outline:none;cursor:pointer"><option>Tous types</option><option>Start-ups</option><option>Partenaires</option><option>Institutions</option><option>Investisseurs</option><option>Offreurs de services</option></select></div>
       <div class="li" onclick="goPage('fiche-entite')"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div><div class="lib"><div class="lit">AI Verse</div><div class="lis">IA · données synthétiques · levée 5M€</div><div class="lim"><span class="tag tb">Deeptech / IA</span><span class="tag tgr">Série A</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
       <div class="li" onclick="goPage('fiche-entite')"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div><div class="lib"><div class="lit">MYCOPHYTO</div><div class="lis">Biostimulants · régénération des sols · levée 16M€</div><div class="lim"><span class="tag tg">CleanTech</span><span class="tag tgr">Série B+</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
       <div class="li"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div><div class="lib"><div class="lit">Exactcure</div><div class="lis">IA médicaments · simulation pharmacocinétique</div><div class="lim"><span class="tag tr">HealthTech</span><span class="tag tgr">Seed</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
       <div class="li"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div><div class="lib"><div class="lit">CCI Nice Côte d'Azur</div><div class="lis">Chambre de Commerce et d'Industrie</div><div class="lim"><span class="tag tv">Institution publique</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
       <div class="li"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div><div class="lib"><div class="lit">OGC Nice</div><div class="lis">Club de football · partenaire sport</div><div class="lim"><span class="tag to">Offreur de services</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ FICHE ENTITÉ ══ -->
 <div id="p-fiche-entite" class="page">
   <div class="topbar"><div class="tbback"><button class="btn bg" onclick="goPage('entites')" style="font-size:11px">← Entités</button><h1>AI Verse</h1></div><div class="tba" id="fiche-entite-actions"><button class="btn bg">✏️ Modifier</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="dg2">
       <div>
         <div class="card"><div class="ch"><span class="ct">Informations</span></div><div class="cb">
@@ -329,7 +370,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
       </div>
       <div>
         <div class="card"><div class="ch"><span class="ct">Contact rattaché</span></div>
-          <div class="li"><div class="av">CF</div><div class="lib"><div class="lit" style="font-size:12px">Claire Fontaine</div><div style="font-size:10px;color:var(--muted)">CEO · Fondatrice</div><div id="contact-email-entite" style="font-size:10px;color:var(--muted)">c.fontaine@ai-verse.io</div></div><button class="btn bg" style="font-size:10px;padding:3px 7px" onclick="goPage('fiche-contact')">→</button></div>
+          <div class="li"><div class="av">CF</div><div class="lib"><div class="lit" style="font-size:12px">Claire Fontaine</div><div style="font-size:10px;color:var(--muted)">CEO · Fondatrice</div><div id="contact-email-entite" style="font-size:10px;color:var(--muted)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb8f5bdb4b5afbab2b5be9bbab2f6adbea9a8bef5b2b4">[email&#160;protected]</a></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px" onclick="goPage('fiche-contact')">→</button></div>
         </div>
         <div class="card"><div class="ch"><span class="ct">Fondateurs</span></div><div class="cb">
           <div class="dr"><span class="dk">Fondateur·ice 1</span><span class="dv">Mme Claire Fontaine</span></div>
@@ -337,13 +378,13 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         </div></div>
       </div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ CONTACTS ══ -->
 <div id="p-contacts" class="page">
   <div class="topbar"><h1>CRM — Contacts</h1><div class="tba" id="contacts-actions"><button class="btn bg" id="btn-export-contacts">📤 Exporter</button><button class="btn bp" onclick="om('m-contact')" id="btn-add-contact">+ Contact</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="card">
       <div class="lf"><div class="sw"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Rechercher…"></div></div>
       <div class="li" onclick="goPage('fiche-contact')"><div class="av" style="width:34px;height:34px;font-size:11px">CF</div><div class="lib"><div class="lit">Claire Fontaine</div><div class="lis">CEO · AI Verse</div><div class="lim"><span class="tag tb">Deeptech / IA</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
@@ -351,20 +392,20 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
       <div class="li"><div class="av" style="width:34px;height:34px;font-size:11px">NB</div><div class="lib"><div class="lit">Nicolas Brun</div><div class="lis">CEO · Exactcure</div><div class="lim"><span class="tag tr">HealthTech</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
       <div class="li"><div class="av" style="width:34px;height:34px;font-size:11px">AM</div><div class="lib"><div class="lit">Amira Mansour</div><div class="lis">CEO · MYCOPHYTO</div><div class="lim"><span class="tag tg">CleanTech</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ FICHE CONTACT ══ -->
 <div id="p-fiche-contact" class="page">
   <div class="topbar"><div class="tbback"><button class="btn bg" onclick="goPage('contacts')" style="font-size:11px">← Contacts</button><h1>Claire Fontaine</h1></div><div class="tba"><button class="btn bg" onclick="om('m-contacter')">📧 Contacter</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="dg2">
       <div>
         <div class="card"><div class="ch"><span class="ct">Informations</span></div><div class="cb">
           <div class="dr"><span class="dk">Civilité</span><span class="dv">Mme</span></div>
           <div class="dr"><span class="dk">Prénom / Nom</span><span class="dv">Claire Fontaine</span></div>
           <div class="dr"><span class="dk">Rôle</span><span class="dv">CEO · Fondatrice</span></div>
-          <div class="dr contact-email-row"><span class="dk">Email</span><span class="dv" style="color:var(--blue)">c.fontaine@ai-verse.io</span></div>
+          <div class="dr contact-email-row"><span class="dk">Email</span><span class="dv" style="color:var(--blue)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="92f1bcf4fdfce6f3fbfcf7d2f3fbbfe4f7e0e1f7bcfbfd">[email&#160;protected]</a></span></div>
           <div class="dr"><span class="dk">Entité</span><span class="dv" style="color:var(--violet);cursor:pointer" onclick="goPage('fiche-entite')">AI Verse →</span></div>
           <div class="dr"><span class="dk">Statut</span><span class="dv"><span class="tag tg">Actif</span></span></div>
         </div></div>
@@ -379,31 +420,31 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         </div>
       </div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ ÉVÉNEMENTS ══ -->
 <div id="p-events" class="page">
   <div class="topbar"><h1>Événements</h1><div class="tba"><button class="btn bg" onclick="goPage('calendrier')">📅 Calendrier</button><button class="btn bp" onclick="om('m-evt')" id="btn-creer-evt">+ Créer</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="tabs"><button class="tab active" onclick="at(this)">À venir</button><button class="tab" onclick="at(this)">Passés</button></div>
     <div class="card">
-      <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Finale Challenge Jeunes Pousses — Telecom Valley</div><div class="lis">18 mars · Sophia Antipolis · 17h</div><div class="lim"><span class="tag tv">Start-ups</span><span style="font-size:10px;color:var(--muted)">68/120 places</span></div></div><div class="lia"><button class="btn bg" style="font-size:10px" id="evt-btn-1">Gérer</button></div></div>
-      <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Matinée IA des Entrepreneurs</div><div class="lis">26 mars · aivancity Nice · 8h30–12h</div><div class="lim"><span class="tag tb">IA</span><span style="font-size:10px;color:var(--muted)">35/80 places</span></div></div><div class="lia"><button class="btn bg" style="font-size:10px" id="evt-btn-2">Gérer</button></div></div>
+      <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Finale Challenge Jeunes Pousses</div><div class="lis">18 mars · Sophia Antipolis · 17h</div><div class="lim"><span class="tag tv">Start-ups</span><span style="font-size:10px;color:var(--muted)">68/120 places</span></div></div><div class="lia"><button class="btn bg" style="font-size:10px" id="evt-btn-1">Gérer</button></div></div>
+      <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Matinée IA des Entrepreneurs</div><div class="lis">26 mars · aivancity Nice · 8h30</div><div class="lim"><span class="tag tb">IA</span><span style="font-size:10px;color:var(--muted)">35/80 places</span></div></div><div class="lia"><button class="btn bg" style="font-size:10px" id="evt-btn-2">Gérer</button></div></div>
       <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Clap Festival — CCI Nice</div><div class="lis">2 avril · CCI Nice</div><div class="lim"><span class="tag tg">Festival</span><span style="font-size:10px;color:var(--muted)">58/100 places</span></div></div><div class="lia"><button class="btn bg" style="font-size:10px" id="evt-btn-3">Gérer</button></div></div>
       <div class="li" onclick="goPage('fiche-event')"><div class="lib"><div class="lit">Cyber Founder Tour Sophia Antipolis</div><div class="lis">9 avril · Sophia Antipolis</div><div class="lim"><span class="tag tr">Cybersécurité</span><span style="font-size:10px;color:var(--muted)">12/40 places</span></div></div><div class="lia"><button class="btn bg" style="font-size:10px" id="evt-btn-4">Gérer</button></div></div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ FICHE EVENT ══ -->
 <div id="p-fiche-event" class="page">
   <div class="topbar"><div class="tbback"><button class="btn bg" onclick="goPage('events')" style="font-size:11px">← Événements</button><h1>Matinée IA des Entrepreneurs</h1></div><div class="tba"><button class="btn bp" id="btn-evt-action">S'inscrire</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="dg2">
       <div>
         <div class="card"><div class="ch"><span class="ct">À propos</span></div><div class="cb">
-          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px">Dans le cadre de leur partenariat, Les Premières Sud s'associe à aivancity Nice pour une matinée dédiée aux entrepreneurs qui veulent comprendre et intégrer l'IA dans leur activité. Conférences, ateliers pratiques et networking.</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px">Les Premières Sud s'associe à aivancity Nice pour une matinée dédiée aux entrepreneurs qui veulent intégrer l'IA dans leur activité. Conférences, ateliers pratiques et networking.</p>
           <div class="dr"><span class="dk">Date</span><span class="dv">26 mars 2026 · 8h30–12h</span></div>
           <div class="dr"><span class="dk">Lieu</span><span class="dv">aivancity Nice, 930 Route des Colles</span></div>
           <div class="dr"><span class="dk">Co-organisateurs</span><span class="dv">Les Premières Sud · aivancity Nice</span></div>
@@ -419,32 +460,47 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         </div>
       </div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ CALENDRIER ══ -->
 <div id="p-calendrier" class="page">
   <div class="topbar"><div class="tbback"><button class="btn bg" onclick="goPage('events')" style="font-size:11px">← Liste</button><h1>Calendrier — Mars 2026</h1></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
       <button class="btn bg" style="padding:5px 9px">‹</button><button class="btn bg" style="padding:5px 9px">›</button>
       <button class="btn bg" style="font-size:11px">Aujourd'hui</button>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;flex:1">Mars 2026</span>
     </div>
     <div class="mcal"><div class="mgrid"><div class="mdl">Lun</div><div class="mdl">Mar</div><div class="mdl">Mer</div><div class="mdl">Jeu</div><div class="mdl">Ven</div><div class="mdl" style="color:var(--light)">Sam</div><div class="mdl" style="color:var(--light)">Dim</div></div><div class="mgrid" id="mcal-grid"></div></div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ MISES EN RELATION ══ -->
 <div id="p-mr" class="page">
   <div class="topbar"><h1>Mises en relation</h1><div class="tba"><button class="btn bp" onclick="om('m-mr')">+ Nouvelle mise en relation</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="sg s3" id="mr-kpis" style="margin-bottom:18px">
       <div class="sc or"><div class="sl">Total YTD 2026</div><div class="sv">128</div></div>
       <div class="sc gr"><div class="sl">Ce mois</div><div class="sv">14</div></div>
       <div class="sc bl"><div class="sl">Initiées par l'équipe</div><div class="sv">89%</div></div>
     </div>
-    <div class="card"><div class="ch"><span class="ct">Historique</span></div>
+    <!-- Demandes reçues (visible membre) -->
+    <div class="card" id="card-mr-demandes" style="display:none">
+      <div class="ch"><span class="ct">Demandes reçues</span></div>
+      <div class="mr-demande">
+        <div class="av" style="width:32px;height:32px;font-size:10px">MA</div>
+        <div class="mr-demande-body">
+          <div class="mr-demande-title">Marc Aveline souhaite vous mettre en relation avec Nicolas Brun (Exactcure)</div>
+          <div class="mr-demande-msg">« Bonjour Claire, je pense que vous auriez des synergies intéressantes sur les sujets IA médicale. »</div>
+          <div class="mr-demande-actions">
+            <button class="btn bp" style="font-size:10px;padding:4px 10px" onclick="om('m-mr-accept')">Accepter</button>
+            <button class="btn bg" style="font-size:10px;padding:4px 10px" onclick="om('m-mr-refus')">Décliner</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card"><div class="ch"><span class="ct" id="mr-history-title">Historique</span></div>
       <table class="tbl">
         <thead><tr><th>Contact A</th><th>Contact B</th><th>Date</th><th>Initié par</th></tr></thead>
         <tbody id="mr-tbody">
@@ -454,30 +510,30 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         </tbody>
       </table>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ PARTENARIATS ══ -->
 <div id="p-partenariats" class="page">
   <div class="topbar"><h1>Partenariats & Tarifs négociés</h1><div class="tba" id="part-actions"><button class="btn bp" onclick="om('m-part')">+ Partenariat</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="card">
       <div class="li" onclick="goPage('fiche-part')"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="lib"><div class="lit">Places OGC Nice — Saison 2025/26</div><div class="lis">Offreur de services · places pour les matchs à domicile</div><div class="lim"><span class="tag to">Actif</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
       <div class="li" onclick="goPage('fiche-part')"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="lib"><div class="lit">Hébergement cloud — Orange</div><div class="lis">-30% offres Pro · valable déc. 2026</div><div class="lim"><span class="tag tg">Actif</span><span class="tag tgr">Tarif négocié</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
       <div class="li" onclick="goPage('fiche-part')"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><path d="M3 6h18M3 12h18M3 18h12"/></svg></div><div class="lib"><div class="lit">Accompagnement juridique — EY Ventury Avocats</div><div class="lis">2h offertes par membre · 2026</div><div class="lim"><span class="tag tg">Actif</span><span class="tag tgr">Tarif négocié</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
       <div class="li" onclick="goPage('fiche-part')"><div class="lic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="lib"><div class="lit">Expertise immobilière — CBRE</div><div class="lis">Conseil gratuit première heure · membres FTCA</div><div class="lim"><span class="tag tg">Actif</span><span class="tag tgr">Tarif négocié</span></div></div><button class="btn bg" style="font-size:10px;padding:3px 7px">Détails</button></div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ FICHE PARTENARIAT ══ -->
 <div id="p-fiche-part" class="page">
   <div class="topbar"><div class="tbback"><button class="btn bg" onclick="goPage('partenariats')" style="font-size:11px">← Partenariats</button><h1>Places OGC Nice</h1></div><div class="tba" id="part-fiche-actions"></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="dg2">
       <div>
         <div class="card"><div class="ch"><span class="ct">Description</span></div><div class="cb">
-          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px">OGC Nice met à disposition de la French Tech Côte d'Azur des places par saison pour les matchs à domicile à l'Allianz Riviera. Les places sont attribuées par entité membre selon les disponibilités.</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px">OGC Nice met à disposition de la French Tech Côte d'Azur des places par saison pour les matchs à domicile. Attribuées par entité membre selon disponibilités.</p>
           <div class="dr"><span class="dk">Partenaire</span><span class="dv">OGC Nice</span></div>
           <div class="dr"><span class="dk">Type</span><span class="dv">Offreur de services</span></div>
           <div class="dr"><span class="dk">Validité</span><span class="dv">Saison 2025/2026</span></div>
@@ -499,44 +555,44 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         </div>
       </div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ AAP ══ -->
 <div id="p-aap" class="page">
   <div class="topbar"><h1>Appels à projets</h1><div class="tba" id="aap-actions"><button class="btn bp" onclick="om('m-aap')">+ Créer un appel</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="aap-card" onclick="goPage('aap-fiche')">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px"><div class="aap-title">RENEW-BOOSTER</div><span class="tag tr">Ouvert · clôt. 28 avril</span></div>
-      <div class="aap-desc">Programme d'accompagnement à la transition énergétique pour les start-ups et PME innovantes de la région Sud.</div>
+      <div class="aap-desc">Programme d'accompagnement à la transition énergétique pour les start-ups et PME de la région Sud.</div>
       <div class="aap-footer"><div class="lim"><span class="tag tg">CleanTech</span><span class="tag tb">Énergie</span></div><button class="btn bg" style="font-size:10px" onclick="event.stopPropagation();goPage('aap-fiche')" id="aap-voir-btn">Voir →</button></div>
     </div>
     <div class="aap-card" onclick="goPage('aap-fiche')">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px"><div class="aap-title">Programme LIFT-1ère</div><span class="tag tr">Ouvert · clôt. 23 avril</span></div>
-      <div class="aap-desc">Accélération dédiée aux femmes entrepreneures de la tech. 6 mois + accès au réseau Les Premières.</div>
+      <div class="aap-desc">Accélération dédiée aux femmes entrepreneures de la tech. 6 mois + réseau Les Premières.</div>
       <div class="aap-footer"><div class="lim"><span class="tag tv">Diversité</span></div><button class="btn bg" style="font-size:10px" onclick="event.stopPropagation();goPage('aap-fiche')">Voir →</button></div>
     </div>
     <div class="aap-card">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px"><div class="aap-title">Interreg ALCOTRA France–Italie</div><span class="tag to">Ouvert · clôt. 29 mai</span></div>
-      <div class="aap-desc">Programme européen de coopération territoriale France-Italie. Financement de projets innovants transfrontaliers.</div>
+      <div class="aap-desc">Programme européen de coopération territoriale transfrontalière dans les Alpes.</div>
       <div class="aap-footer"><div class="lim"><span class="tag tb">EU</span></div><button class="btn bg" style="font-size:10px">Voir →</button></div>
     </div>
     <div class="aap-card" style="opacity:.6">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px"><div class="aap-title">start-up ALIVE</div><span class="tag tgr">Clôturé · 16 mars</span></div>
-      <div class="aap-desc">Programme d'émergence pour projets deep tech à fort potentiel de croissance.</div>
+      <div class="aap-desc">Programme d'émergence pour projets deep tech à fort potentiel.</div>
       <div class="aap-footer"><div class="lim"><span class="tag tgr">Deeptech</span></div></div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ FICHE AAP ══ -->
 <div id="p-aap-fiche" class="page">
   <div class="topbar"><div class="tbback"><button class="btn bg" onclick="goPage('aap')" style="font-size:11px">← Appels à projets</button><h1>RENEW-BOOSTER</h1></div><div class="tba" id="aap-fiche-actions"><button class="btn bg" style="font-size:10px">🔗 ftca.ksaar.app/candidature/renew-booster</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="dg2">
       <div>
         <div class="card"><div class="ch"><span class="ct">Description</span></div><div class="cb">
-          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px">Programme d'accompagnement à la transition énergétique pour les start-ups et PME innovantes de la région Sud. Soutien financier jusqu'à 50 000€ et 6 mois de mentorat.</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px">Programme d'accompagnement à la transition énergétique. Soutien financier jusqu'à 50 000€ et 6 mois de mentorat par des experts sectoriels.</p>
           <div class="dr"><span class="dk">Ouverture</span><span class="dv">1er mars 2026</span></div>
           <div class="dr"><span class="dk">Clôture</span><span class="dv">28 avril 2026</span></div>
           <div class="dr"><span class="dk">Critères</span><span class="dv">Start-up ou PME · innovation énergétique · région Sud</span></div>
@@ -569,30 +625,30 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         </div></div>
       </div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ PROJETS ══ -->
 <div id="p-projets" class="page">
   <div class="topbar"><h1 id="projets-title">Projets internes</h1><div class="tba" id="projets-actions"><button class="btn bp" onclick="om('m-proj')">+ Projet</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="aap-card" onclick="goPage('fiche-projet')">
       <div style="display:flex;justify-content:space-between;margin-bottom:4px"><div class="aap-title">Cartographie Écosystème France-Italie</div><span class="tag tb">En cours</span></div>
-      <div class="aap-desc">Identification et mise en réseau des acteurs tech franco-italiens dans le cadre du programme Interreg ALCOTRA.</div>
+      <div class="aap-desc">Identification et mise en réseau des acteurs tech franco-italiens dans le cadre d'Interreg ALCOTRA.</div>
       <div class="proj-meta"><div class="proj-meta-item">Responsable : <strong>Léa Bernard</strong></div><div class="proj-meta-item">Échéance : <strong>30 juin 2026</strong></div><div class="proj-meta-item">Avancement : <strong>60%</strong></div></div>
     </div>
     <div class="aap-card" id="proj-card-2" onclick="goPage('fiche-projet')">
       <div style="display:flex;justify-content:space-between;margin-bottom:4px"><div class="aap-title">Rapport Annuel 2025</div><span class="tag to">En retard</span></div>
-      <div class="aap-desc">Collecte des KPIs annuels, rédaction et mise en page du rapport pour le board et French Tech Mission.</div>
+      <div class="aap-desc">Collecte des KPIs, rédaction et mise en page pour le board et French Tech Mission.</div>
       <div class="proj-meta"><div class="proj-meta-item">Responsable : <strong>Laura Durand</strong></div><div class="proj-meta-item">Échéance : <strong>15 avril 2026</strong></div><div class="proj-meta-item">Avancement : <strong>40%</strong></div></div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ FICHE PROJET ══ -->
 <div id="p-fiche-projet" class="page">
   <div class="topbar"><div class="tbback"><button class="btn bg" onclick="goPage('projets')" style="font-size:11px">← Projets</button><h1>Cartographie France-Italie</h1></div><div class="tba"><button class="btn bp" onclick="om('m-tache')">+ Tâche</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="card" style="margin-bottom:14px"><div class="cb">
       <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px">
         <div class="proj-meta-item">Responsable : <strong>Léa Bernard</strong></div>
@@ -613,22 +669,23 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         </tbody>
       </table>
     </div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ ÉQUIPE & CONGÉS ══ -->
 <div id="p-team" class="page">
   <div class="topbar"><h1 id="team-title">Équipe & Congés</h1><div class="tba"><button class="bdark btn" onclick="om('m-conge')">Demande de congés</button></div></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div id="team-validate-section">
       <div class="card" style="margin-bottom:14px"><div class="ch"><span class="ct">À valider</span></div>
         <table class="tbl">
           <thead><tr><th>Membre</th><th>Type</th><th>Du</th><th>Au</th><th>Durée</th><th style="text-align:center">Accepter</th><th style="text-align:center">Refuser</th></tr></thead>
-          <tbody>
-            <tr><td><div style="display:flex;align-items:center;gap:7px"><div class="av" style="width:22px;height:22px;font-size:8px">LB</div>Léa Bernard</div></td><td>Congés payés</td><td>03/04/2026</td><td>05/04/2026</td><td>3 jours</td>
+          <tbody><tr>
+            <td><div style="display:flex;align-items:center;gap:7px"><div class="av" style="width:22px;height:22px;font-size:8px">LB</div>Léa Bernard</div></td>
+            <td>Congés payés</td><td>03/04/2026</td><td>05/04/2026</td><td>3 jours</td>
             <td style="text-align:center"><div class="icon-btn accept" style="margin:0 auto" onclick="this.closest('tr').style.opacity='.4'">✓</div></td>
-            <td style="text-align:center"><div class="icon-btn reject" style="margin:0 auto" onclick="this.closest('tr').style.opacity='.4'">✕</div></td></tr>
-          </tbody>
+            <td style="text-align:center"><div class="icon-btn reject" style="margin:0 auto" onclick="this.closest('tr').style.opacity='.4'">✕</div></td>
+          </tr></tbody>
         </table>
       </div>
     </div>
@@ -644,14 +701,13 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;flex:1">Mars 2026</span>
     </div>
     <div class="mcal"><div class="mgrid"><div class="mdl">Lun</div><div class="mdl">Mar</div><div class="mdl">Mer</div><div class="mdl">Jeu</div><div class="mdl">Ven</div><div class="mdl" style="color:var(--light)">Sam</div><div class="mdl" style="color:var(--light)">Dim</div></div><div class="mgrid" id="conge-grid"></div></div>
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ KPI ══ -->
 <div id="p-kpi" class="page">
   <div class="topbar"><h1>KPIs & Reporting</h1><div class="tba"><button class="btn bg">📤 Exporter</button></div></div>
-  <div class="content"><div class="wrap">
-
+  <div class="content">
     <div class="kpi-section">
       <div class="kpi-section-title">CRM</div>
       <div class="sg s4" style="margin-bottom:14px">
@@ -663,17 +719,11 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
       <div class="card"><div class="ch"><span class="ct">Répartition sectorielle des start-ups</span></div><div class="cb">
         <div class="pie-wrap">
           <svg viewBox="0 0 120 120" width="140" height="140" style="flex-shrink:0">
-            <!-- HealthTech 31% -->
             <path d="M60,60 L60,10 A50,50 0 0,1 109.8,47.5 Z" fill="#e8343c"/>
-            <!-- CleanTech 24% -->
             <path d="M60,60 L109.8,47.5 A50,50 0 0,1 86.6,103.3 Z" fill="#059669"/>
-            <!-- Deeptech 19% -->
             <path d="M60,60 L86.6,103.3 A50,50 0 0,1 26.1,96.9 Z" fill="#3d2b7a"/>
-            <!-- Cybersécurité 13% -->
             <path d="M60,60 L26.1,96.9 A50,50 0 0,1 13.4,26.8 Z" fill="#2563eb"/>
-            <!-- Fintech 8% -->
             <path d="M60,60 L13.4,26.8 A50,50 0 0,1 46.1,10.6 Z" fill="#d97706"/>
-            <!-- Autres 5% -->
             <path d="M60,60 L46.1,10.6 A50,50 0 0,1 60,10 Z" fill="#9ca3af"/>
             <circle cx="60" cy="60" r="28" fill="white"/>
           </svg>
@@ -688,7 +738,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         </div>
       </div></div>
     </div>
-
     <div class="kpi-section">
       <div class="kpi-section-title">Activité</div>
       <div class="sg s3">
@@ -697,7 +746,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         <div class="sc or"><div class="sl">Mises en relation cette année</div><div class="sv">128</div></div>
       </div>
     </div>
-
     <div class="kpi-section">
       <div class="kpi-section-title">Appels à projets</div>
       <div class="sg s2">
@@ -705,14 +753,13 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         <div class="sc tv" style="border-left-color:var(--violet)"><div class="sl">Candidatures reçues</div><div class="sv">42</div></div>
       </div>
     </div>
-
-  </div></div>
+  </div>
 </div>
 
 <!-- ══ PARAMÉTRAGE ══ -->
 <div id="p-param" class="page">
   <div class="topbar"><h1>Paramétrage</h1></div>
-  <div class="content"><div class="wrap">
+  <div class="content">
     <div class="g2">
       <div>
         <div class="card"><div class="ch"><span class="ct">Modèles d'événements</span><button class="btn bp" style="font-size:10px;padding:4px 8px">+ Créer</button></div>
@@ -738,7 +785,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
         </div>
       </div>
     </div>
-  </div></div>
+  </div>
 </div>
 
 </main>
@@ -748,14 +795,14 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 <div id="app-nonmembre" style="display:none;width:100%;padding-top:36px">
   <div class="standalone">
     <div class="standalone-inner">
-      <div class="standalone-header">
+      <div style="text-align:center;margin-bottom:28px">
         <div style="font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">La French Tech</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--red);text-transform:uppercase">Côte d'Azur</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--muted);text-transform:uppercase">Région Sud</div>
       </div>
       <div class="standalone-card">
         <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;text-transform:uppercase;margin-bottom:4px">Déposer une candidature</h2>
-        <p style="font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.5">Complétez ce formulaire pour soumettre votre dossier. Vous recevrez un accusé de réception sous 24h.</p>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.5">Accusé de réception sous 24h.</p>
         <div style="background:var(--surface);border-radius:7px;padding:12px 14px;margin-bottom:18px;border-left:3px solid var(--violet)">
           <div style="font-size:11px;font-weight:600;color:var(--violet);margin-bottom:2px">RENEW-BOOSTER — Transition énergétique</div>
           <div style="font-size:10px;color:var(--muted)">Clôture : 28 avril 2026</div>
@@ -773,7 +820,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
           <p style="font-size:10px;color:var(--muted)">PDF, PPT · max 20 Mo</p>
         </div>
         <button class="btn bp" style="width:100%;justify-content:center;padding:10px;font-size:12px;border-radius:7px">Soumettre ma candidature →</button>
-        <p style="text-align:center;font-size:10px;color:var(--light);margin-top:10px">Accusé de réception sous 24h · <span style="color:var(--violet);cursor:pointer">Mentions légales</span></p>
       </div>
     </div>
   </div>
@@ -784,7 +830,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 
 <div class="mo" id="m-inscrire" onclick="cm(event,'m-inscrire')"><div class="modal" onclick="event.stopPropagation()"><h3>S'inscrire</h3><p style="font-size:12px;color:var(--muted);margin-bottom:16px">Matinée IA des Entrepreneurs · 26 mars · aivancity Nice</p><div class="fr"><label class="fl">Nombre de places</label><select class="fi"><option>1</option><option>2</option><option>3</option></select></div><div class="fr"><label class="fl">Commentaire (optionnel)</label><textarea class="fi fta" style="min-height:50px"></textarea></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-inscrire')">Annuler</button><button class="btn bp" onclick="cm(null,'m-inscrire')">Confirmer l'inscription</button></div></div></div>
 
-<div class="mo" id="m-entite" onclick="cm(event,'m-entite')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouvelle entité</h3><div class="fr"><label class="fl">Nom</label><input class="fi" placeholder="Nom de l'organisation"></div><div class="fr2"><div><label class="fl">Type</label><select class="fi"><option>Start-up</option><option>PME / ETI</option><option>Institution publique</option><option>Investisseur</option><option>Offreur de services</option></select></div><div><label class="fl">Secteur</label><select class="fi"><option>HealthTech</option><option>CleanTech</option><option>Deeptech / IA</option><option>Autre</option></select></div></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-entite')">Annuler</button><button class="btn bp" onclick="cm(null,'m-entite')">Enregistrer</button></div></div></div>
+<div class="mo" id="m-entite" onclick="cm(event,'m-entite')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouvelle entité</h3><div class="fr"><label class="fl">Nom</label><input class="fi"></div><div class="fr2"><div><label class="fl">Type</label><select class="fi"><option>Start-up</option><option>PME / ETI</option><option>Institution publique</option><option>Investisseur</option><option>Offreur de services</option></select></div><div><label class="fl">Secteur</label><select class="fi"><option>HealthTech</option><option>CleanTech</option><option>Deeptech / IA</option><option>Autre</option></select></div></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-entite')">Annuler</button><button class="btn bp" onclick="cm(null,'m-entite')">Enregistrer</button></div></div></div>
 
 <div class="mo" id="m-contact" onclick="cm(event,'m-contact')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouveau contact</h3><div class="fr2"><div><label class="fl">Civilité</label><select class="fi"><option>M.</option><option>Mme</option><option>Autre</option></select></div><div><label class="fl">Prénom</label><input class="fi"></div></div><div class="fr2"><div><label class="fl">Nom</label><input class="fi"></div><div><label class="fl">Rôle</label><input class="fi" placeholder="CEO…"></div></div><div class="fr"><label class="fl">Email</label><input class="fi" type="email"></div><div class="fr"><label class="fl">Entité</label><select class="fi"><option>— Sélectionner —</option><option>AI Verse</option><option>MYCOPHYTO</option><option>Exactcure</option><option>CCI Nice</option></select></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-contact')">Annuler</button><button class="btn bp" onclick="cm(null,'m-contact')">Enregistrer</button></div></div></div>
 
@@ -796,7 +842,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 
 <div class="mo" id="m-tache" onclick="cm(event,'m-tache')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouvelle tâche</h3><div class="fr"><label class="fl">Tâche</label><input class="fi" placeholder="Description de la tâche"></div><div class="fr2"><div><label class="fl">Responsable</label><select class="fi"><option>Laura Durand</option><option>Marc Aveline</option><option>Léa Bernard</option></select></div><div><label class="fl">Échéance</label><input class="fi" type="date"></div></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-tache')">Annuler</button><button class="btn bp" onclick="cm(null,'m-tache')">Enregistrer</button></div></div></div>
 
-<div class="mo" id="m-tache-detail" onclick="cm(event,'m-tache-detail')"><div class="modal" onclick="event.stopPropagation()"><h3>Rédaction rapport intermédiaire</h3><div class="fr"><label class="fl">Statut</label><select class="fi"><option>À faire</option><option selected>En cours</option><option>Terminée</option></select></div><div class="fr"><label class="fl">Note / commentaire</label><textarea class="fi fta" placeholder="Ajouter une note…">Premier jet en cours, revue prévue le 25 avril.</textarea></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-tache-detail')">Annuler</button><button class="btn bp" onclick="cm(null,'m-tache-detail')">Enregistrer</button></div></div></div>
+<div class="mo" id="m-tache-detail" onclick="cm(event,'m-tache-detail')"><div class="modal" onclick="event.stopPropagation()"><h3>Rédaction rapport intermédiaire</h3><div style="font-size:11px;color:var(--muted);margin-bottom:14px">Cartographie France-Italie · Responsable : Marc Aveline · Éch. 30 avril</div><div class="fr"><label class="fl">Statut</label><select class="fi"><option>À faire</option><option selected>En cours</option><option>Terminée</option></select></div><div class="fr"><label class="fl">Note / commentaire</label><textarea class="fi fta" placeholder="Ajouter une note…">Premier jet en cours, revue prévue le 25 avril.</textarea></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-tache-detail')">Annuler</button><button class="btn bp" onclick="cm(null,'m-tache-detail')">Enregistrer</button></div></div></div>
 
 <div class="mo" id="m-aap" onclick="cm(event,'m-aap')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouvel appel à projets</h3><div class="fr"><label class="fl">Titre</label><input class="fi" placeholder="Ex : RENEW-BOOSTER 2027"></div><div class="fr2"><div><label class="fl">Ouverture</label><input class="fi" type="date"></div><div><label class="fl">Clôture</label><input class="fi" type="date"></div></div><div class="fr"><label class="fl">Description</label><textarea class="fi fta" placeholder="Critères, conditions…"></textarea></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-aap')">Annuler</button><button class="btn bp" onclick="cm(null,'m-aap')">Enregistrer & lien</button></div></div></div>
 
@@ -804,15 +850,38 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 
 <div class="mo" id="m-part" onclick="cm(event,'m-part')"><div class="modal" onclick="event.stopPropagation()"><h3>Nouveau partenariat</h3><div class="fr"><label class="fl">Entité</label><select class="fi"><option>OGC Nice</option><option>Orange</option><option>EY Ventury Avocats</option><option>CBRE</option></select></div><div class="fr2"><div><label class="fl">Type</label><select class="fi"><option>Offreur de services & tarifs négociés</option><option>Financeur</option><option>Co-organisateur</option><option>Mécénat</option></select></div><div><label class="fl">Places / entité membre</label><input class="fi" type="number" placeholder="10"></div></div><div class="fr2"><div><label class="fl">Début</label><input class="fi" type="date"></div><div><label class="fl">Fin</label><input class="fi" type="date"></div></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-part')">Annuler</button><button class="btn bp" onclick="cm(null,'m-part')">Enregistrer</button></div></div></div>
 
-<!-- Formulaire candidature MEMBRE (pré-rempli) -->
+<!-- Accepter mise en relation -->
+<div class="mo" id="m-mr-accept" onclick="cm(event,'m-mr-accept')"><div class="modal" onclick="event.stopPropagation()">
+  <h3>Accepter la mise en relation</h3>
+  <div style="background:var(--surface);border-radius:7px;padding:12px 14px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div class="av" style="width:32px;height:32px;font-size:10px">CF</div>
+      <span style="font-size:13px;font-weight:600">Vous</span>
+      <span style="color:var(--light);font-size:16px">↔</span>
+      <div class="av" style="width:32px;height:32px;font-size:10px">NB</div>
+      <span style="font-size:13px;font-weight:600">Nicolas Brun</span>
+    </div>
+    <div style="font-size:11px;color:var(--muted)">Exactcure · HealthTech</div>
+  </div>
+  <div class="fr"><label class="fl">Message (optionnel)</label><textarea class="fi fta" placeholder="Ajoutez un mot pour vous présenter…" style="min-height:60px"></textarea></div>
+  <div class="mf"><button class="btn bg" onclick="cm(null,'m-mr-accept')">Annuler</button><button class="btn bp" onclick="cm(null,'m-mr-accept')">✓ Confirmer</button></div>
+</div></div>
+
+<!-- Décliner mise en relation -->
+<div class="mo" id="m-mr-refus" onclick="cm(event,'m-mr-refus')"><div class="modal" onclick="event.stopPropagation()">
+  <h3>Décliner la mise en relation</h3>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.5">Vous pouvez indiquer une raison à Marc Aveline (optionnel).</p>
+  <div class="fr"><label class="fl">Raison (optionnel)</label><textarea class="fi fta" placeholder="Ex : Pas le bon moment, sujet non pertinent pour moi…" style="min-height:60px"></textarea></div>
+  <div class="mf"><button class="btn bg" onclick="cm(null,'m-mr-refus')">Annuler</button><button class="btn bp" style="background:#6b7280" onclick="cm(null,'m-mr-refus')">Décliner</button></div>
+</div></div>
+
+<!-- Candidature membre pré-remplie -->
 <div class="mo" id="m-candid" onclick="cm(event,'m-candid')"><div class="modal" onclick="event.stopPropagation()">
   <h3>Candidature RENEW-BOOSTER</h3>
-  <div style="background:var(--surface);border-radius:6px;padding:9px 12px;margin-bottom:16px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px">
-    <span style="color:var(--green)">✓</span> Informations pré-remplies depuis votre profil — complétez uniquement les champs spécifiques à cet appel
-  </div>
+  <div style="background:var(--surface);border-radius:6px;padding:9px 12px;margin-bottom:16px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="color:var(--green)">✓</span>Informations pré-remplies depuis votre profil</div>
   <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:10px">Votre organisation</div>
   <div class="fr2"><div><label class="fl">Nom de l'entreprise</label><input class="fi" value="AI Verse" readonly></div><div><label class="fl">SIRET</label><input class="fi" value="832 541 210 00023" readonly></div></div>
-  <div class="fr2"><div><label class="fl">Forme juridique</label><select class="fi"><option selected>SAS</option><option>SARL</option><option>SA</option><option>Association</option></select></div><div><label class="fl">Secteur</label><select class="fi"><option>CleanTech</option><option>HealthTech</option><option selected>Deeptech / IA</option><option>Fintech</option><option>Autre</option></select></div></div>
+  <div class="fr2"><div><label class="fl">Forme juridique</label><select class="fi"><option selected>SAS</option><option>SARL</option><option>SA</option></select></div><div><label class="fl">Secteur</label><select class="fi"><option>CleanTech</option><option selected>Deeptech / IA</option><option>HealthTech</option></select></div></div>
   <div class="fr"><label class="fl">Description du projet <span style="color:var(--red)">*</span></label><textarea class="fi fta" placeholder="En quoi votre projet répond-il aux critères de RENEW-BOOSTER ?"></textarea></div>
   <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:12px 0 10px">Contact</div>
   <div class="fr2"><div><label class="fl">Civilité</label><select class="fi"><option>M.</option><option selected>Mme</option><option>Autre</option></select></div><div><label class="fl">Prénom / Nom</label><input class="fi" value="Claire Fontaine" readonly></div></div>
@@ -824,15 +893,15 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 
 <div class="mo" id="m-demande-mr" onclick="cm(event,'m-demande-mr')"><div class="modal" onclick="event.stopPropagation()"><h3>Demander une mise en relation</h3><div class="fr"><label class="fl">Avec qui ?</label><select class="fi"><option>— Sélectionner —</option><option>Nicolas Brun — Exactcure</option><option>Amira Mansour — MYCOPHYTO</option><option>Pierre Rault — CCI Nice</option></select></div><div class="fr"><label class="fl">Pourquoi cette mise en relation ?</label><textarea class="fi fta" placeholder="Contexte et objectif…"></textarea></div><div class="mf"><button class="btn bg" onclick="cm(null,'m-demande-mr')">Annuler</button><button class="btn bp" onclick="cm(null,'m-demande-mr')">Envoyer la demande</button></div></div></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const PERSONAS={
-  admin:{user:{av:'LD',name:'Laura Durand',role:'Admin'},
+  admin:{user:{av:'LD',name:'Laura Durand',role:'Admin'},dash:'dash',
     nav:[{label:'Tableau de bord',page:'dash',icon:'grid'},{section:'CRM'},{label:'Entités',page:'entites',icon:'building'},{label:'Contacts',page:'contacts',icon:'user'},{section:'Activité'},{label:'Événements',page:'events',icon:'cal'},{label:'Mises en relation',page:'mr',icon:'link'},{label:'Partenariats',page:'partenariats',icon:'heart'},{label:'Appels à projets',page:'aap',icon:'plus'},{section:'Équipe'},{label:'Équipe & Congés',page:'team',icon:'users'},{label:'Projets internes',page:'projets',icon:'folder'},{section:'Analyse'},{label:'KPIs',page:'kpi',icon:'bar'},{section:'Config'},{label:'Paramétrage',page:'param',icon:'settings'}]},
-  interne:{user:{av:'MA',name:'Marc Aveline',role:'Équipier'},
-    nav:[{label:'Tableau de bord',page:'dash',icon:'grid'},{section:'CRM'},{label:'Entités',page:'entites',icon:'building'},{label:'Contacts',page:'contacts',icon:'user'},{section:'Activité'},{label:'Événements',page:'events',icon:'cal'},{label:'Mises en relation',page:'mr',icon:'link'},{label:'Partenariats',page:'partenariats',icon:'heart'},{label:'Appels à projets',page:'aap',icon:'plus'},{section:'Équipe'},{label:'Mes projets & tâches',page:'projets',icon:'folder'},{label:'Mes congés',page:'team',icon:'users'}]},
-  membre:{user:{av:'CF',name:'Claire Fontaine',role:'Membre — AI Verse'},
+  interne:{user:{av:'MA',name:'Marc Aveline',role:'Équipier'},dash:'dash-interne',
+    nav:[{label:'Tableau de bord',page:'dash-interne',icon:'grid'},{section:'CRM'},{label:'Entités',page:'entites',icon:'building'},{label:'Contacts',page:'contacts',icon:'user'},{section:'Activité'},{label:'Événements',page:'events',icon:'cal'},{label:'Mises en relation',page:'mr',icon:'link'},{label:'Partenariats',page:'partenariats',icon:'heart'},{label:'Appels à projets',page:'aap',icon:'plus'},{section:'Équipe'},{label:'Mes projets & tâches',page:'projets',icon:'folder'},{label:'Mes congés',page:'team',icon:'users'}]},
+  membre:{user:{av:'CF',name:'Claire Fontaine',role:'Membre — AI Verse'},dash:'dash-membre',
     nav:[{label:'Accueil',page:'dash-membre',icon:'grid'},{section:'Activité'},{label:'Événements',page:'events',icon:'cal'},{label:'Appels à projets',page:'aap',icon:'plus'},{label:'Mises en relation',page:'mr',icon:'link'},{section:'Annuaire'},{label:'Entités',page:'entites',icon:'building'},{label:'Contacts',page:'contacts',icon:'user'},{section:'Avantages'},{label:'Partenariats',page:'partenariats',icon:'heart'}]},
-  ca:{user:{av:'BD',name:'Bernard Dupuis',role:"Conseil d'admin"},
+  ca:{user:{av:'BD',name:'Bernard Dupuis',role:"Conseil d'admin"},dash:'entites',
     nav:[{section:'CRM'},{label:'Entités',page:'entites',icon:'building'},{label:'Contacts',page:'contacts',icon:'user'},{section:'Analyse'},{label:'KPIs',page:'kpi',icon:'bar'}]}
 };
 
@@ -851,7 +920,7 @@ function setPersona(p){
     else{const b=document.createElement('button');b.className='ni';b.innerHTML=IC[item.icon]+item.label;b.onclick=()=>goPage(item.page,b);nav.appendChild(b);}
   });
   applyRules(p);
-  const first=cfg.nav.find(i=>i.page);if(first)goPage(first.page);
+  goPage(cfg.dash);
 }
 
 function applyRules(p){
@@ -866,9 +935,13 @@ function applyRules(p){
   const mrc=document.getElementById('card-mr-contact');if(mrc)mrc.style.display=isAdmin?'':'none';
   const mrk=document.getElementById('mr-kpis');if(mrk)mrk.style.display=canEdit?'':'none';
 
+  // MR demandes (membre uniquement)
+  const mrd=document.getElementById('card-mr-demandes');if(mrd)mrd.style.display=isMembre?'':'none';
+
+  // MR tableau
   const mrb=document.getElementById('mr-tbody');
-  if(mrb&&isMembre)mrb.innerHTML='<tr><td><a onclick="goPage(\'fiche-contact\')">Nicolas Brun</a><div style="font-size:10px;color:var(--muted)">Exactcure</div></td><td style="color:var(--muted);font-size:11px">Vous</td><td>08/01/2026</td><td>Marc Aveline</td></tr>';
-  else if(mrb)mrb.innerHTML='<tr><td><a onclick="goPage(\'fiche-contact\')">Claire Fontaine</a><div style="font-size:10px;color:var(--muted)">AI Verse</div></td><td><a onclick="goPage(\'fiche-contact\')">Nicolas Brun</a><div style="font-size:10px;color:var(--muted)">Exactcure</div></td><td>08/01/2026</td><td>Marc Aveline</td></tr><tr><td><a onclick="goPage(\'fiche-contact\')">Amira Mansour</a><div style="font-size:10px;color:var(--muted)">MYCOPHYTO</div></td><td><a onclick="goPage(\'fiche-contact\')">Pierre Rault</a><div style="font-size:10px;color:var(--muted)">CCI Nice</div></td><td>15/01/2026</td><td>Laura Durand</td></tr><tr><td><a onclick="goPage(\'fiche-contact\')">Nicolas Brun</a><div style="font-size:10px;color:var(--muted)">Exactcure</div></td><td><a onclick="goPage(\'fiche-contact\')">Amira Mansour</a><div style="font-size:10px;color:var(--muted)">MYCOPHYTO</div></td><td>03/02/2026</td><td>Marc Aveline</td></tr>';
+  if(mrb&&isMembre)mrb.innerHTML='<tr><td style="color:var(--muted);font-size:11px">Vous</td><td><a onclick="goPage(\'fiche-contact\')">Nicolas Brun</a><div style="font-size:10px;color:var(--muted)">Exactcure</div></td><td>08/01/2026</td><td>Marc Aveline</td></tr>';
+  else if(mrb)mrb.innerHTML='<tr><td><a onclick="goPage(\'fiche-contact\')">Claire Fontaine</a><div style="font-size:10px;color:var(--muted)">AI Verse</div></td><td><a onclick="goPage(\'fiche-contact\')">Nicolas Brun</a><div style="font-size:10px;color:var(--muted)">Exactcure</div></td><td>08/01/2026</td><td>Marc Aveline</td></tr><tr><td><a onclick="goPage(\'fiche-contact\')">Amira Mansour</a><div style="font-size:10px;color:var(--muted)">MYCOPHYTO</div></td><td><a onclick="goPage(\'fiche-contact\')">Pierre Rault</a><div style="font-size:10px;color:var(--muted)">CCI Nice</div></td><td>15/01/2026</td><td>Laura Durand</td></tr>';
 
   const pa=document.getElementById('part-actions');if(pa)pa.style.display=isAdmin?'':'none';
   const pfa=document.getElementById('part-fiche-actions');
@@ -919,6 +992,10 @@ function at(el){el.closest('.tabs')?.querySelectorAll('.tab').forEach(t=>t.class
 function om(id){document.getElementById(id).classList.add('open');}
 function cm(e,id){if(!e||e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
 
+// PIE LEGEND
+const pieWrap=document.querySelector('.pie-wrap');
+if(pieWrap)pieWrap.style;
+
 function buildCal(gridId,evts){
   const fD=6,dim=31,we=[6,7,13,14,20,21,27,28];
   const grid=document.getElementById(gridId);if(!grid)return;grid.innerHTML='';
@@ -932,10 +1009,4 @@ function buildCal(gridId,evts){
   const total=fD+dim;const rem=total%7===0?0:7-(total%7);
   for(let i=0;i<rem;i++){const d=document.createElement('div');d.className='md om';grid.appendChild(d);}
 }
-buildCal('mcal-grid',{18:[{l:'Challenge JP',c:'violet'}],26:[{l:'Matinée IA',c:'red'}]});
-buildCal('conge-grid',{18:[{l:'SC — Congé',c:'red'}],19:[{l:'SC — Congé',c:'red'}],20:[{l:'SC — Congé',c:'red'}],21:[{l:'SC — Congé',c:'red'}],22:[{l:'SC — Congé',c:'red'}],3:[{l:'LB — Mission',c:'blue'}],4:[{l:'LB — Mission',c:'blue'}],5:[{l:'LB — Mission',c:'blue'}]});
-
-setPersona('admin');
-</script>
-</body>
-</html>
+buildCal('mcal-grid',{18:[{l:'Challenge JP',c:'violet'}],26:[{l:'Matinée 
